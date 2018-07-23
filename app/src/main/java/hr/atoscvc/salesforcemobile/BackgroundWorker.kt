@@ -46,15 +46,13 @@ class BackgroundWorker(private var context: WeakReference<Context>, var header: 
 
         } else if (type == context.get()?.getString(R.string.typeRegister)) {
             try {
-                val name: String = p0[1]
-                val surname: String = p0[2]
-                val age: String = p0[3]
-                val username: String = p0[4]
-                val password: String = p0[5]
+                val firstName: String = p0[1]
+                val lastName: String = p0[2]
+                val username: String = p0[3]
+                val password: String = p0[4]
 
-                val postData: String = URLEncoder.encode(context.get()?.getString(R.string.name), context.get()?.getString(R.string.UTF8)) + "=" + URLEncoder.encode(name, context.get()?.getString(R.string.UTF8)) + "&" +
-                        URLEncoder.encode(context.get()?.getString(R.string.surname), context.get()?.getString(R.string.UTF8)) + "=" + URLEncoder.encode(surname, context.get()?.getString(R.string.UTF8)) + "&" +
-                        URLEncoder.encode(context.get()?.getString(R.string.age), context.get()?.getString(R.string.UTF8)) + "=" + URLEncoder.encode(age, context.get()?.getString(R.string.UTF8)) + "&" +
+                val postData: String = URLEncoder.encode(context.get()?.getString(R.string.firstName), context.get()?.getString(R.string.UTF8)) + "=" + URLEncoder.encode(firstName, context.get()?.getString(R.string.UTF8)) + "&" +
+                        URLEncoder.encode(context.get()?.getString(R.string.lastName), context.get()?.getString(R.string.UTF8)) + "=" + URLEncoder.encode(lastName, context.get()?.getString(R.string.UTF8)) + "&" +
                         URLEncoder.encode(context.get()?.getString(R.string.username), context.get()?.getString(R.string.UTF8)) + "=" + URLEncoder.encode(username, context.get()?.getString(R.string.UTF8)) + "&" +
                         URLEncoder.encode(context.get()?.getString(R.string.password), context.get()?.getString(R.string.UTF8)) + "=" + URLEncoder.encode(password, context.get()?.getString(R.string.UTF8))
 

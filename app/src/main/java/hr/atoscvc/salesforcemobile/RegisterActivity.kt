@@ -18,7 +18,7 @@ class RegisterActivity : AppCompatActivity() {
         val type = "Register"
         if (etPassword.text.toString() == etConfirm.text.toString()) {
             val backgroundWorker = BackgroundWorker(WeakReference(this), getString(R.string.registrationStatus))
-            backgroundWorker.execute(type, etName.text.toString(), etSurname.text.toString(), etAge.text.toString(), etUsername.text.toString(), etPassword.text.toString())
+            backgroundWorker.execute(type, etFirstName.text.toString(), etLastName.text.toString(), etUsername.text.toString(), etPassword.text.toString())
         } else {
             Toast.makeText(this, getString(R.string.wrongConfirmPassword), Toast.LENGTH_SHORT).show()
         }

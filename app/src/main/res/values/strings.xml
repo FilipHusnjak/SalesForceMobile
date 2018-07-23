@@ -11,9 +11,8 @@
     <string name="typeRegister">Register</string>
     <string name="username">username</string>
     <string name="password">password</string>
-    <string name="name">name</string>
-    <string name="surname">surname</string>
-    <string name="age">age</string>
+    <string name="firstName">firstName</string>
+    <string name="lastName">lastName</string>
     <string name="wrongConfirmPassword">Password does not match the confirm password.</string>
     <string name="registrationStatus">Registration status</string>
     <string name="loginStatus">Login status</string>
