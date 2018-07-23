@@ -9,7 +9,7 @@ import java.net.MalformedURLException
 import java.net.URL
 import java.net.URLEncoder
 
-class BackgroundWorker(private var context: WeakReference<Context>, var header: String) : AsyncTask<String, Void, String?>() {
+class BackgroundWorker(private var context: WeakReference<Context>, private var header: String) : AsyncTask<String, Void, String?>() {
 
     private lateinit var alertDialog: AlertDialog
 
