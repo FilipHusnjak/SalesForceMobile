@@ -27,7 +27,7 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
             val editTextUserString = editTextUser.text.toString()
             val editTextPassString = editTextPass.text.toString()
 
-            if (editTextUserString.isNotBlank() && editTextPassString.isNotEmpty()) {
+            if (editTextUserString.isNotEmpty() && editTextPassString.isNotEmpty()) {
                 val isPassGood = checkPasswordConstraints(editTextUserString, editTextPassString)
                 if (!isPassGood.success) {
                     editTextPass.error = isPassGood.message
