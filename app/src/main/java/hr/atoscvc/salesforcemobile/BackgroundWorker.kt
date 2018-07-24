@@ -1,25 +1,28 @@
 package hr.atoscvc.salesforcemobile
 
-import android.app.AlertDialog
 import android.content.Context
 import android.os.AsyncTask
+import android.view.View
+import android.widget.ProgressBar
 import java.io.IOException
 import java.lang.ref.WeakReference
 import java.net.MalformedURLException
 import java.net.URL
 import java.net.URLEncoder
 
-class BackgroundWorker(private var context: WeakReference<Context>, private var header: String) : AsyncTask<String, Void, String?>() {
 
-    private lateinit var alertDialog: AlertDialog
+class BackgroundWorker(private var context: WeakReference<Context>, private var header: String, private var delegate: AsyncResponse, private var progressBar: ProgressBar) : AsyncTask<String, Void, String>() {
+
+    interface AsyncResponse {
+        fun processFinish(output: String)
+    }
 
     override fun onPreExecute() {
         super.onPreExecute()
-        alertDialog = AlertDialog.Builder(context.get()).create()
-        alertDialog.setTitle(header)
+        progressBar.visibility = View.VISIBLE
     }
 
-    override fun doInBackground(vararg p0: String): String? {
+    override fun doInBackground(vararg p0: String): String {
         val type: String = p0[0]
         val loginURL = context.get()?.getString(R.string.loginURL)
         val registerURL = context.get()?.getString(R.string.registerURL)
@@ -34,14 +37,14 @@ class BackgroundWorker(private var context: WeakReference<Context>, private var 
                 val url: URL = NetworkUtils.buildUrl(loginURL!!)
 
                 return NetworkUtils.getResponseFromHttpUrl(url, postData)
-                        ?: return context.get()?.getString(R.string.serverNoResponse)
+                        ?: return context.get()?.getString(R.string.serverNoResponse)!!
 
             } catch (e: MalformedURLException) {
                 e.printStackTrace()
-                return context.get()?.getString(R.string.malformedURL)
+                return context.get()?.getString(R.string.malformedURL)!!
             } catch (e: IOException) {
                 e.printStackTrace()
-                return context.get()?.getString(R.string.exceptionIO)
+                return context.get()?.getString(R.string.exceptionIO)!!
             }
 
         } else if (type == context.get()?.getString(R.string.typeRegister)) {
@@ -59,24 +62,24 @@ class BackgroundWorker(private var context: WeakReference<Context>, private var 
                 val url: URL = NetworkUtils.buildUrl(registerURL!!)
 
                 return NetworkUtils.getResponseFromHttpUrl(url, postData)
-                        ?: return context.get()?.getString(R.string.serverNoResponse)
+                        ?: return context.get()?.getString(R.string.serverNoResponse)!!
 
             } catch (e: MalformedURLException) {
                 e.printStackTrace()
-                return context.get()?.getString(R.string.malformedURL)
+                return context.get()?.getString(R.string.malformedURL)!!
             } catch (e: IOException) {
                 e.printStackTrace()
-                return context.get()?.getString(R.string.exceptionIO)
+                return context.get()?.getString(R.string.exceptionIO)!!
             }
 
         }
-        return context.get()?.getString(R.string.typeNotRecognized)
+        return context.get()?.getString(R.string.typeNotRecognized)!!
     }
 
-    override fun onPostExecute(result: String?) {
+    override fun onPostExecute(result: String) {
         super.onPostExecute(result)
-        alertDialog.setMessage(result)
-        alertDialog.show()
+        progressBar.visibility = View.INVISIBLE
+        delegate.processFinish(result)
     }
 
 }
