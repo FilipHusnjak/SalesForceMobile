@@ -1,6 +1,7 @@
 package hr.atoscvc.salesforcemobile
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
@@ -27,7 +28,7 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
             val editTextUserString = editTextUser.text.toString()
             val editTextPassString = editTextPass.text.toString()
 
-            if (editTextUserString.isNotEmpty() && editTextPassString.isNotEmpty()) {
+            if (editTextPassString.isNotEmpty()) {
                 val isPassGood = checkPasswordConstraints(editTextUserString, editTextPassString)
                 if (!isPassGood.success) {
                     editTextPass.error = isPassGood.message
@@ -43,25 +44,25 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
     object CheckPasswordConstraints {
         fun checkPasswordConstraints(user: String, pass: String): PasswordErrors {
             if (pass.length < 8) {
-                return PasswordErrors("Password must be at least 8 characters long!", false)
+                return PasswordErrors("Password must be at least 8 characters long", false)
             }
             if (pass.length > 30) {
-                return PasswordErrors("Password cannot contain more than 30 characters!", false)
+                return PasswordErrors("Password cannot contain more than 30 characters", false)
             }
             if (user.isNotEmpty() && pass.contains(user, true)) {
-                return PasswordErrors("Password must not contain the username!", false)
+                return PasswordErrors("Password must not contain the username", false)
             }
             if (user.contains(pass, true)) {
-                return PasswordErrors("Username must not contain the password!", false)
+                return PasswordErrors("Username must not contain the password", false)
             }
             if (!pass.matches(".*[A-Z].*".toRegex())) {
-                return PasswordErrors("Password must contain at least one uppercase letter!", false)
+                return PasswordErrors("Password must contain at least one uppercase letter", false)
             }
             if (!pass.matches(".*[a-z].*".toRegex())) {
-                return PasswordErrors("Password must contain at least one lowercase letter!", false)
+                return PasswordErrors("Password must contain at least one lowercase letter", false)
             }
             if (!pass.matches(".*\\d.*".toRegex())) {
-                return PasswordErrors("Password must contain at least one digit!", false)
+                return PasswordErrors("Password must contain at least one digit", false)
             }
 
             return PasswordErrors("Password is fine.", true)
@@ -77,6 +78,10 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
 
         etUsername.addTextChangedListener(PasswordTextWatcher(etUsername, etPassword))
         etPassword.addTextChangedListener(PasswordTextWatcher(etUsername, etPassword))
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            etUsername.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_action_username, 0, 0, 0)
+        }
     }
 
     override fun onResume() {
