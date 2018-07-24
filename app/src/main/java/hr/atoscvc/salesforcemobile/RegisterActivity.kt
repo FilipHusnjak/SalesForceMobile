@@ -17,6 +17,11 @@ import java.lang.ref.WeakReference
 
 class RegisterActivity : AppCompatActivity(), AsyncResponse {
 
+    private lateinit var userSession: SessionManager
+
+    lateinit var username: String
+    lateinit var password: String
+
     data class PasswordErrors(val message: String, val success: Boolean)
 
     private class PasswordTextWatcher(val editTextUser: EditText, val editTextPass: EditText) : TextWatcher {
@@ -73,6 +78,8 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+        userSession = SessionManager(this)
+
         registerProgress.visibility = View.INVISIBLE
         btnRegister.visibility = View.VISIBLE
 
@@ -91,8 +98,8 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
     }
 
     fun onRegister(@Suppress("UNUSED_PARAMETER") view: View) {
-        val username = etUsername.text.toString()
-        val password = etPassword.text.toString()
+        username = etUsername.text.toString()
+        password = etPassword.text.toString()
         val passwordStatus = checkPasswordConstraints(username, password)
 
         if (!passwordStatus.success) {
@@ -112,6 +119,8 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
     override fun processFinish(output: String) {
         btnRegister.visibility = View.VISIBLE
         if (output.contains("successful")) {
+            userSession.createLoginSession(username, password)
+
             val intent = Intent(this, MainMenuActivity::class.java)
             startActivity(intent)
             setResult(RESULT_OK)

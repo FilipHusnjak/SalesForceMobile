@@ -37,7 +37,7 @@ class MainMenuActivity : AppCompatActivity() {
         alert.show()
     }
 
-    fun onLogout(view: View) {
+    fun onLogout(@Suppress("UNUSED_PARAMETER") view: View) {
         userSession.logoutUser()
     }
 }

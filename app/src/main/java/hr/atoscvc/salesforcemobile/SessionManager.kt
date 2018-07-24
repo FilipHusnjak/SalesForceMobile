@@ -1,15 +1,15 @@
 package hr.atoscvc.salesforcemobile
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.content.Intent
+import android.content.SharedPreferences
 
 
 class SessionManager(private var context: Context) {
 
-    lateinit var pref: SharedPreferences
-    lateinit var editor: SharedPreferences.Editor
-    var PRIVATE_MODE: Int = 0
+    var pref: SharedPreferences
+    var editor: SharedPreferences.Editor
+    private var PRIVATE_MODE: Int = 0
 
     init {
         pref = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE)
@@ -33,7 +33,7 @@ class SessionManager(private var context: Context) {
 
     fun checkLogin() {
         if (!this.isLoggedIn()) {
-            var intent: Intent = Intent(context, MainActivity::class.java)
+            val intent = Intent(context, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             context.startActivity(intent)
         }
@@ -41,7 +41,7 @@ class SessionManager(private var context: Context) {
     }
 
     fun getUserDetails(): HashMap<String, String> {
-        var user: HashMap<String, String> = HashMap<String, String>()
+        val user: HashMap<String, String> = HashMap<String, String>()
         user[KEY_USERNAME] = pref.getString(KEY_USERNAME, null)
         user[KEY_PASSWORD] = pref.getString(KEY_PASSWORD, null)
         return user
@@ -51,7 +51,7 @@ class SessionManager(private var context: Context) {
         editor.clear()
         editor.commit()
 
-        val intent: Intent = Intent(context, MainActivity::class.java)
+        val intent = Intent(context, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         context.startActivity(intent)
 

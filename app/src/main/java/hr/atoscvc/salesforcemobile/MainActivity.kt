@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
-import android.widget.TextView
 import android.widget.Toast
 import hr.atoscvc.salesforcemobile.BackgroundWorker.AsyncResponse
 import kotlinx.android.synthetic.main.activity_main.*
@@ -34,14 +33,9 @@ class MainActivity : AppCompatActivity(), AsyncResponse {
         btnLogin.visibility = VISIBLE
         btnRegister.visibility = VISIBLE
         if (userSession.isLoggedIn()) {
-            /*btnLogin.visibility = INVISIBLE
-            btnRegister.visibility = INVISIBLE*/
-            val operation = "Login"
-            val user = userSession.getUserDetails()
-            /*val backgroundWorker = BackgroundWorker(WeakReference(this), getString(R.string.loginStatus), this, loginProgress)
-            backgroundWorker.execute(operation, user[SessionManager.KEY_USERNAME], user[SessionManager.KEY_PASSWORD])*/
-            etUsername.setText(user[SessionManager.KEY_USERNAME], TextView.BufferType.EDITABLE)
-            etPassword.setText(user[SessionManager.KEY_PASSWORD], TextView.BufferType.EDITABLE)
+            val intent = Intent(this, MainMenuActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 

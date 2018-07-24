@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Sales Force Mobile</string>
-    <string name="loginURL">http://atoscvc.000webhostapp.com/login.php</string>
-    <string name="registerURL">http://atoscvc.000webhostapp.com/register.php</string>
+    <string name="loginURL">http://192.168.1.10/login.php</string>
+    <string name="registerURL">http://192.168.1.10/register.php</string>
     <string name="serverNoResponse">No response from server</string>
     <string name="malformedURL">Malformed URL exception!</string>
     <string name="exceptionIO">IO exception</string>
