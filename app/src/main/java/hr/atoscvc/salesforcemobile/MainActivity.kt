@@ -4,6 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
+import android.widget.TextView
 import android.widget.Toast
 import hr.atoscvc.salesforcemobile.BackgroundWorker.AsyncResponse
 import kotlinx.android.synthetic.main.activity_main.*
@@ -12,27 +15,41 @@ import java.lang.ref.WeakReference
 class MainActivity : AppCompatActivity(), AsyncResponse {
     //TODO Forgot my password - novi random na mail - reset on first login - boolean u bazi
 
+    private lateinit var userSession: SessionManager
+    lateinit var username: String
+    lateinit var password: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        loginProgress.visibility = View.INVISIBLE
-        btnLogin.visibility = View.VISIBLE
-        btnRegister.visibility = View.VISIBLE
+        userSession = SessionManager(this)
+        loginProgress.visibility = INVISIBLE
+        btnLogin.visibility = VISIBLE
+        btnRegister.visibility = VISIBLE
     }
 
     override fun onResume() {
         super.onResume()
-        loginProgress.visibility = View.INVISIBLE
-        btnLogin.visibility = View.VISIBLE
-        btnRegister.visibility = View.VISIBLE
+        loginProgress.visibility = INVISIBLE
+        btnLogin.visibility = VISIBLE
+        btnRegister.visibility = VISIBLE
+        if (userSession.isLoggedIn()) {
+            /*btnLogin.visibility = INVISIBLE
+            btnRegister.visibility = INVISIBLE*/
+            val operation = "Login"
+            val user = userSession.getUserDetails()
+            /*val backgroundWorker = BackgroundWorker(WeakReference(this), getString(R.string.loginStatus), this, loginProgress)
+            backgroundWorker.execute(operation, user[SessionManager.KEY_USERNAME], user[SessionManager.KEY_PASSWORD])*/
+            etUsername.setText(user[SessionManager.KEY_USERNAME], TextView.BufferType.EDITABLE)
+            etPassword.setText(user[SessionManager.KEY_PASSWORD], TextView.BufferType.EDITABLE)
+        }
     }
 
     fun onLogin(@Suppress("UNUSED_PARAMETER") view: View) {
-        btnLogin.visibility = View.INVISIBLE
-        btnRegister.visibility = View.INVISIBLE
-        val username: String = etUsername.text.toString()
-        val password: String = etPassword.text.toString()
+        btnLogin.visibility = INVISIBLE
+        btnRegister.visibility = INVISIBLE
+        username = etUsername.text.toString()
+        password = etPassword.text.toString()
         val operation = "Login"
         val backgroundWorker = BackgroundWorker(WeakReference(this), getString(R.string.loginStatus), this, loginProgress)
         backgroundWorker.execute(operation, username, password)
@@ -45,12 +62,13 @@ class MainActivity : AppCompatActivity(), AsyncResponse {
 
     override fun processFinish(output: String) {
         if (output.contains("Welcome")) {
+            userSession.createLoginSession(username, password)
             val intent = Intent(this, MainMenuActivity::class.java)
             startActivity(intent)
             finish()
         } else {
-            btnLogin.visibility = View.VISIBLE
-            btnRegister.visibility = View.VISIBLE
+            btnLogin.visibility = VISIBLE
+            btnRegister.visibility = VISIBLE
             Toast.makeText(this, output, Toast.LENGTH_SHORT).show()
         }
     }
