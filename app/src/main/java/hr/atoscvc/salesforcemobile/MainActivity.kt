@@ -10,7 +10,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.ref.WeakReference
 
 class MainActivity : AppCompatActivity(), AsyncResponse {
-    //TODO 3 kriva logina blokiraju usera - boolean u bazi
     //TODO Forgot my password - novi random na mail - reset on first login - boolean u bazi
 
 
