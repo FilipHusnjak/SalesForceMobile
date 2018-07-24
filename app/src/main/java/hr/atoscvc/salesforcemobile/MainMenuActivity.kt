@@ -3,16 +3,24 @@ package hr.atoscvc.salesforcemobile
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.widget.Toast
 
 
 class MainMenuActivity : AppCompatActivity() {
 
+    private lateinit var userSession: SessionManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
-
+        userSession = SessionManager(this)
         Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        userSession.checkLogin()
     }
 
     override fun onBackPressed() {
@@ -27,5 +35,9 @@ class MainMenuActivity : AppCompatActivity() {
         }
         val alert = builder.create()
         alert.show()
+    }
+
+    fun onLogout(view: View) {
+        userSession.logoutUser()
     }
 }
