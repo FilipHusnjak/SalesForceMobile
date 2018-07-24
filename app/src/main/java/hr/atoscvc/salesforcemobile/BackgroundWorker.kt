@@ -11,7 +11,12 @@ import java.net.URL
 import java.net.URLEncoder
 
 
-class BackgroundWorker(private var context: WeakReference<Context>, private var header: String, private var delegate: AsyncResponse, private var progressBar: ProgressBar) : AsyncTask<String, Void, String>() {
+class BackgroundWorker(
+        private var context: WeakReference<Context>,
+        @Suppress("unused") private var header: String,
+        private var delegate: AsyncResponse,
+        private var progressBar: ProgressBar
+) : AsyncTask<String, Void, String>() {
 
     interface AsyncResponse {
         fun processFinish(output: String)
@@ -81,5 +86,4 @@ class BackgroundWorker(private var context: WeakReference<Context>, private var 
         progressBar.visibility = View.INVISIBLE
         delegate.processFinish(result)
     }
-
 }

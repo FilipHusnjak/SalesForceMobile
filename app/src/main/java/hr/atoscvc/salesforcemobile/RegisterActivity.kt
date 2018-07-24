@@ -30,7 +30,13 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
         if (etPassword.text.toString() == etConfirm.text.toString()) {
             btnRegister.visibility = View.INVISIBLE
             val backgroundWorker = BackgroundWorker(WeakReference(this), getString(R.string.registrationStatus), this, registerProgress)
-            backgroundWorker.execute(type, etFirstName.text.toString(), etLastName.text.toString(), etUsername.text.toString(), etPassword.text.toString())
+            backgroundWorker.execute(
+                    type,
+                    etFirstName.text.toString(),
+                    etLastName.text.toString(),
+                    etUsername.text.toString(),
+                    etPassword.text.toString()
+            )
 
         } else {
             Toast.makeText(this, getString(R.string.wrongConfirmPassword), Toast.LENGTH_SHORT).show()
@@ -44,12 +50,8 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
             startActivity(intent)
             setResult(RESULT_OK)
             finish()
-
         } else {
             Toast.makeText(this, output, Toast.LENGTH_SHORT).show()
-
         }
     }
-
 }
-

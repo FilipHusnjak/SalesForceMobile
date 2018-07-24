@@ -1,11 +1,9 @@
 package hr.atoscvc.salesforcemobile
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import android.R.string.cancel
-import android.content.DialogInterface
 import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 
 
 class MainMenuActivity : AppCompatActivity() {
@@ -21,14 +19,13 @@ class MainMenuActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
         builder.setCancelable(false)
         builder.setMessage("Do you want to Exit?")
-        builder.setNegativeButton("No", DialogInterface.OnClickListener { dialog, which ->
+        builder.setNegativeButton("No") { dialog, _ ->
             dialog.cancel()
-        })
-        builder.setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->
+        }
+        builder.setPositiveButton("Yes") { _, _ ->
             finish()
-        })
+        }
         val alert = builder.create()
         alert.show()
-
     }
 }

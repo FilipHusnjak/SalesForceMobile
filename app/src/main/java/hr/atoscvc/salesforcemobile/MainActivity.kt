@@ -1,15 +1,13 @@
 package hr.atoscvc.salesforcemobile
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
+import hr.atoscvc.salesforcemobile.BackgroundWorker.AsyncResponse
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.ref.WeakReference
-import hr.atoscvc.salesforcemobile.BackgroundWorker.AsyncResponse
 
 class MainActivity : AppCompatActivity(), AsyncResponse {
     //TODO 3 kriva logina blokiraju usera - boolean u bazi
@@ -47,19 +45,15 @@ class MainActivity : AppCompatActivity(), AsyncResponse {
     }
 
     override fun processFinish(output: String) {
-
         if (output.contains("Welcome")) {
             val intent = Intent(this, MainMenuActivity::class.java)
             startActivity(intent)
             finish()
-
         } else {
             btnLogin.visibility = View.VISIBLE
             btnRegister.visibility = View.VISIBLE
             Toast.makeText(this, output, Toast.LENGTH_SHORT).show()
-
         }
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
