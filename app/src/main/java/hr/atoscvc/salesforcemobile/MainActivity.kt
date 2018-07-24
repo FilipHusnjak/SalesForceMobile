@@ -11,7 +11,7 @@ import hr.atoscvc.salesforcemobile.BackgroundWorker.AsyncResponse
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.ref.WeakReference
 
-class MainActivity : AppCompatActivity(), AsyncResponse {
+class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
     //TODO Forgot my password - novi random na mail - reset on first login - boolean u bazi
 
     private lateinit var userSession: SessionManager
@@ -21,7 +21,11 @@ class MainActivity : AppCompatActivity(), AsyncResponse {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         userSession = SessionManager(this)
+
+        (application as MyApp).registerSessionListener(this)
+
         loginProgress.visibility = INVISIBLE
         btnLogin.visibility = VISIBLE
         btnRegister.visibility = VISIBLE
@@ -29,10 +33,13 @@ class MainActivity : AppCompatActivity(), AsyncResponse {
 
     override fun onResume() {
         super.onResume()
+
         loginProgress.visibility = INVISIBLE
         btnLogin.visibility = VISIBLE
         btnRegister.visibility = VISIBLE
+
         if (userSession.isLoggedIn()) {
+            (application as MyApp).startUserSession()
             val intent = Intent(this, MainMenuActivity::class.java)
             startActivity(intent)
             finish()
@@ -40,12 +47,13 @@ class MainActivity : AppCompatActivity(), AsyncResponse {
     }
 
     fun onLogin(@Suppress("UNUSED_PARAMETER") view: View) {
+
         btnLogin.visibility = INVISIBLE
         btnRegister.visibility = INVISIBLE
         username = etUsername.text.toString()
         password = etPassword.text.toString()
         val operation = "Login"
-        val backgroundWorker = BackgroundWorker(WeakReference(this), getString(R.string.loginStatus), this, loginProgress)
+        val backgroundWorker = BackgroundWorker(WeakReference(this), getString(R.string.loginStatus), this, WeakReference(loginProgress))
         backgroundWorker.execute(operation, username, password)
     }
 
@@ -57,6 +65,9 @@ class MainActivity : AppCompatActivity(), AsyncResponse {
     override fun processFinish(output: String) {
         if (output.contains("Welcome")) {
             userSession.createLoginSession(username, password)
+
+            (application as MyApp).startUserSession()
+
             val intent = Intent(this, MainMenuActivity::class.java)
             startActivity(intent)
             finish()
@@ -71,6 +82,10 @@ class MainActivity : AppCompatActivity(), AsyncResponse {
         if (resultCode == RESULT_OK) {
             finish()
         }
+    }
+
+    override fun onSessionTimeout() {
+        userSession.logoutUser()
     }
 
 }

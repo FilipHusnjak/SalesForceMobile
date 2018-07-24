@@ -108,7 +108,7 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
             val type = "Register"
             if (password == etConfirm.text.toString()) {
                 btnRegister.visibility = View.INVISIBLE
-                val backgroundWorker = BackgroundWorker(WeakReference(this), getString(R.string.registrationStatus), this, registerProgress)
+                val backgroundWorker = BackgroundWorker(WeakReference(this), getString(R.string.registrationStatus), this, WeakReference(registerProgress))
                 backgroundWorker.execute(type, etFirstName.text.toString(), etLastName.text.toString(), username, password)
             } else {
                 etConfirm.error = getString(R.string.wrongConfirmPassword)
@@ -121,6 +121,8 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
         if (output.contains("successful")) {
             userSession.createLoginSession(username, password)
 
+            (application as MyApp).startUserSession()
+
             val intent = Intent(this, MainMenuActivity::class.java)
             startActivity(intent)
             setResult(RESULT_OK)
@@ -129,4 +131,5 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
             Toast.makeText(this, output, Toast.LENGTH_SHORT).show()
         }
     }
+
 }

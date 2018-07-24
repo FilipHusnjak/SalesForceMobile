@@ -15,7 +15,7 @@ class BackgroundWorker(
         private var context: WeakReference<Context>,
         @Suppress("unused") private var header: String,
         private var delegate: AsyncResponse,
-        private var progressBar: ProgressBar
+        private var progressBar: WeakReference<ProgressBar>
 ) : AsyncTask<String, Void, String>() {
 
     interface AsyncResponse {
@@ -24,7 +24,7 @@ class BackgroundWorker(
 
     override fun onPreExecute() {
         super.onPreExecute()
-        progressBar.visibility = View.VISIBLE
+        progressBar.get()?.visibility = View.VISIBLE
     }
 
     override fun doInBackground(vararg p0: String): String {
@@ -83,7 +83,7 @@ class BackgroundWorker(
 
     override fun onPostExecute(result: String) {
         super.onPostExecute(result)
-        progressBar.visibility = View.INVISIBLE
+        progressBar.get()?.visibility = View.INVISIBLE
         delegate.processFinish(result)
     }
 }

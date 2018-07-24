@@ -5,7 +5,6 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 
-
 object NetworkUtils {
 
     fun buildUrl(link: String): URL {

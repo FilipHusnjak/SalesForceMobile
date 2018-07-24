@@ -40,4 +40,11 @@ class MainMenuActivity : AppCompatActivity() {
     fun onLogout(@Suppress("UNUSED_PARAMETER") view: View) {
         userSession.logoutUser()
     }
+
+    override fun onUserInteraction() {
+        if (userSession.isLoggedIn()) {
+            (application as MyApp).onUserInteracted()
+        }
+    }
+
 }
