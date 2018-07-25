@@ -10,8 +10,6 @@ class MyApp : Application() {
 
     private lateinit var timer: Timer
 
-    var isActivityInForeground = true
-
     fun startUserSession() {
         cancelTimer()
         timer = Timer()
@@ -23,7 +21,7 @@ class MyApp : Application() {
         }, 5000)
     }
 
-    private fun cancelTimer() {
+    fun cancelTimer() {
         if (::timer.isInitialized) timer.cancel()
     }
 

@@ -3,6 +3,8 @@ package hr.atoscvc.salesforcemobile
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.util.Log
+import android.widget.Toast
 
 
 class SessionManager(private var context: Context) {
@@ -50,10 +52,11 @@ class SessionManager(private var context: Context) {
         return user
     }
 
-    fun logoutUser() {
+    fun logoutUserData() {
         savedData = ""
         if (pref.getBoolean(KEY_SAVE, false)){
-            savedData = pref.getString(KEY_USERNAME, "Bok")
+            savedData = pref.getString(KEY_USERNAME, "")
+            Log.i("PROBA", "RADI")
         }
 
         editor.clear()
@@ -62,12 +65,19 @@ class SessionManager(private var context: Context) {
         editor.putString(KEY_USERNAME, savedData)
         editor.commit()
 
-        if (!(context.applicationContext as MyApp).isActivityInForeground){
-            val intent = Intent(context, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            context.startActivity(intent)
-        }
+    }
 
+    fun logoutUserView() {
+        val intent = Intent(context, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        context.startActivity(intent)
+    }
+
+    fun exitApp() {
+        val intent = Intent(context.applicationContext, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        intent.putExtra("EXIT", true)
+        context.startActivity(intent)
     }
 
     fun isLoggedIn(): Boolean {
