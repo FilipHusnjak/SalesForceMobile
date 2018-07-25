@@ -3,7 +3,6 @@ package hr.atoscvc.salesforcemobile
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.util.Log
 
 
 class SessionManager(private var context: Context) {
@@ -11,6 +10,7 @@ class SessionManager(private var context: Context) {
     var pref: SharedPreferences
     var editor: SharedPreferences.Editor
     lateinit var savedData: String
+    var savedBool: Boolean = false
     private var PRIVATE_MODE: Int = 0
 
     init {
@@ -53,14 +53,15 @@ class SessionManager(private var context: Context) {
 
     fun logoutUserData() {
         savedData = ""
-        if (pref.getBoolean(KEY_SAVE, false)) {
+        savedBool = pref.getBoolean(KEY_SAVE, false)
+        if (savedBool) {
             savedData = pref.getString(KEY_USERNAME, "")
-            Log.i("PROBA", "RADI")
         }
 
         editor.clear()
         editor.commit()
 
+        editor.putBoolean(KEY_SAVE, savedBool)
         editor.putString(KEY_USERNAME, savedData)
         editor.commit()
 

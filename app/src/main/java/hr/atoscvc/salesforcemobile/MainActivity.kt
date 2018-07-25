@@ -32,6 +32,10 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
 
         etUsername.setText(userSession.getUserDetails()[SessionManager.KEY_USERNAME])
 
+        if (userSession.getUserDetails()[SessionManager.KEY_USERNAME] != "") {
+            cbSave.isChecked = true
+        }
+
         loginProgress.visibility = INVISIBLE
         btnLogin.visibility = VISIBLE
         btnRegister.visibility = VISIBLE
