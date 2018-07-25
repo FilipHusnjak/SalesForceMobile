@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
 
     private lateinit var userSession: SessionManager
     lateinit var username: String
-    lateinit var password: String
+    lateinit var passwordHash: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,10 +65,10 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
         btnLogin.visibility = INVISIBLE
         btnRegister.visibility = INVISIBLE
         username = etUsername.text.toString()
-        password = etPassword.text.toString()
+        passwordHash = HashSHA3.getHashedValue(etPassword.text.toString())
         val operation = "Login"
         val backgroundWorker = BackgroundWorker(WeakReference(this), getString(R.string.loginStatus), this, WeakReference(loginProgress))
-        backgroundWorker.execute(operation, username, password)
+        backgroundWorker.execute(operation, username, passwordHash)
     }
 
     fun onRegister(@Suppress("UNUSED_PARAMETER") view: View) {
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
 
     override fun processFinish(output: String) {
         if (output.contains("Welcome")) {
-            userSession.createLoginSession(username, password, cbSave.isChecked)
+            userSession.createLoginSession(username, passwordHash, cbSave.isChecked)
 
             (application as MyApp).startUserSession()
 

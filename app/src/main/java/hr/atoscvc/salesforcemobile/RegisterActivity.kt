@@ -9,8 +9,10 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import hr.atoscvc.salesforcemobile.BackgroundWorker.AsyncResponse
+import hr.atoscvc.salesforcemobile.R.string.password
 import hr.atoscvc.salesforcemobile.RegisterActivity.CheckPasswordConstraints.checkPasswordConstraints
 import kotlinx.android.synthetic.main.activity_register.*
+import org.walleth.sha3.calculateSHA3
 import java.lang.ref.WeakReference
 
 
@@ -19,7 +21,7 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
     private lateinit var userSession: SessionManager
 
     lateinit var username: String
-    lateinit var password: String
+    lateinit var passwordHashed: String
     lateinit var firstName: String
     lateinit var lastName: String
     lateinit var email: String
@@ -99,7 +101,7 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
         var thereAreNoErrors = true
 
         username = etUsername.text.toString()
-        password = etPassword.text.toString()
+        val password = etPassword.text.toString()
         firstName = etFirstName.text.toString()
         lastName = etLastName.text.toString()
         email = etEmail.text.toString()
@@ -133,6 +135,7 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
 
         if (thereAreNoErrors) {
             val type = "Register"
+            passwordHashed = HashSHA3.getHashedValue(password)
             btnRegister.visibility = View.INVISIBLE
             val backgroundWorker = BackgroundWorker(
                     WeakReference(this),
@@ -140,14 +143,14 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
                     this,
                     WeakReference(registerProgress)
             )
-            backgroundWorker.execute(type, firstName, lastName, username, password)
+            backgroundWorker.execute(type, firstName, lastName, username, passwordHashed)
         }
     }
 
     override fun processFinish(output: String) {
         btnRegister.visibility = View.VISIBLE
         if (output.contains("successful")) {
-            userSession.createLoginSession(username, password, false)
+            userSession.createLoginSession(username, passwordHashed, false)
 
             (application as MyApp).startUserSession()
 
