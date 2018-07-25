@@ -5,6 +5,7 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_main_menu.*
 
 
 class MainMenuActivity : AppCompatActivity() {
@@ -15,6 +16,7 @@ class MainMenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
         userSession = SessionManager(this)
+        tvUsername.text = userSession.getUserDetails()[SessionManager.KEY_USERNAME]
         Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show()
     }
 
