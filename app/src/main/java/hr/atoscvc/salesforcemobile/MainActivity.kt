@@ -22,9 +22,15 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        if (intent.getBooleanExtra("EXIT", false)) {
+            finish()
+        }
+
         userSession = SessionManager(this)
 
         (application as MyApp).registerSessionListener(this)
+
+        etUsername.setText(userSession.getUserDetails()[SessionManager.KEY_USERNAME])
 
         loginProgress.visibility = INVISIBLE
         btnLogin.visibility = VISIBLE
@@ -46,8 +52,12 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
         }
     }
 
-    fun onLogin(@Suppress("UNUSED_PARAMETER") view: View) {
+    override fun onPause() {
+        super.onPause()
+        // if()
+    }
 
+    fun onLogin(@Suppress("UNUSED_PARAMETER") view: View) {
         btnLogin.visibility = INVISIBLE
         btnRegister.visibility = INVISIBLE
         username = etUsername.text.toString()
@@ -64,7 +74,7 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
 
     override fun processFinish(output: String) {
         if (output.contains("Welcome")) {
-            userSession.createLoginSession(username, password)
+            userSession.createLoginSession(username, password, cbSave.isSelected)
 
             (application as MyApp).startUserSession()
 
@@ -87,7 +97,6 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
     override fun onSessionTimeout() {
         userSession.logoutUser()
     }
-
 
 
 }
