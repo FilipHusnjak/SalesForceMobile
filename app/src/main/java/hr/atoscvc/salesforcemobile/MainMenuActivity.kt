@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main_menu.*
-import android.content.Intent
-
 
 
 
@@ -25,17 +23,7 @@ class MainMenuActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        (application as MyApp).isActivityInForeground = false
         userSession.checkLogin()
-        val intent = Intent(applicationContext, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        intent.putExtra("EXIT", true)
-        startActivity(intent)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        (application as MyApp).isActivityInForeground = true
     }
 
     override fun onBackPressed() {
@@ -46,15 +34,19 @@ class MainMenuActivity : AppCompatActivity() {
             dialog.cancel()
         }
         builder.setPositiveButton("Yes") { _, _ ->
-            (application as MyApp).isActivityInForeground = true
-            userSession.logoutUser()
+            (application as MyApp).cancelTimer()
+            userSession.logoutUserData()
+            userSession.exitApp()
+            finish()
         }
         val alert = builder.create()
         alert.show()
     }
 
     fun onLogout(@Suppress("UNUSED_PARAMETER") view: View) {
-        userSession.logoutUser()
+        (application as MyApp).cancelTimer()
+        userSession.logoutUserData()
+        userSession.logoutUserView()
     }
 
     override fun onUserInteraction() {

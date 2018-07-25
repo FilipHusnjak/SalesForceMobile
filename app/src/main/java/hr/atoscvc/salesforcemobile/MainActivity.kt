@@ -3,6 +3,7 @@ package hr.atoscvc.salesforcemobile
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
@@ -74,7 +75,7 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
 
     override fun processFinish(output: String) {
         if (output.contains("Welcome")) {
-            userSession.createLoginSession(username, password, cbSave.isSelected)
+            userSession.createLoginSession(username, password, cbSave.isChecked)
 
             (application as MyApp).startUserSession()
 
@@ -95,7 +96,8 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
     }
 
     override fun onSessionTimeout() {
-        userSession.logoutUser()
+        userSession.logoutUserData()
+        userSession.logoutUserView()
     }
 
 
