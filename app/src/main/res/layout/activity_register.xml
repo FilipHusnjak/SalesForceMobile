@@ -41,7 +41,7 @@
         android:drawableStart="@drawable/ic_action_person"
         android:ems="10"
         android:hint="@string/FirstName"
-        android:inputType="textPersonName"
+        android:inputType="textCapWords"
         app:layout_constraintBottom_toTopOf="@+id/etLastName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -60,7 +60,7 @@
         android:drawableStart="@drawable/ic_action_person"
         android:ems="10"
         android:hint="@string/LastName"
-        android:inputType="textPersonName"
+        android:inputType="textCapWords"
         app:layout_constraintBottom_toTopOf="@+id/etUsername"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
