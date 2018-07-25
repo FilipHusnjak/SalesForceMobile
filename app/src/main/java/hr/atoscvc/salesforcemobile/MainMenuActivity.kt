@@ -8,7 +8,6 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main_menu.*
 
 
-
 class MainMenuActivity : AppCompatActivity() {
 
     private lateinit var userSession: SessionManager

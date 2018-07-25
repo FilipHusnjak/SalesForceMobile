@@ -3,7 +3,6 @@ package hr.atoscvc.salesforcemobile
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
@@ -32,6 +31,10 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
         (application as MyApp).registerSessionListener(this)
 
         etUsername.setText(userSession.getUserDetails()[SessionManager.KEY_USERNAME])
+
+        if (userSession.getUserDetails()[SessionManager.KEY_USERNAME] != "") {
+            cbSave.isChecked = true
+        }
 
         loginProgress.visibility = INVISIBLE
         btnLogin.visibility = VISIBLE
