@@ -21,6 +21,9 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
 
     lateinit var username: String
     lateinit var password: String
+    lateinit var firstName: String
+    lateinit var lastName: String
+    lateinit var email: String
 
     data class PasswordErrors(val message: String, val success: Boolean)
 
@@ -98,21 +101,51 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
     }
 
     fun onRegister(@Suppress("UNUSED_PARAMETER") view: View) {
+        var thereAreNoErrors = true
+
         username = etUsername.text.toString()
         password = etPassword.text.toString()
+        firstName = etFirstName.text.toString()
+        lastName = etLastName.text.toString()
+        email = etEmail.text.toString()
+
         val passwordStatus = checkPasswordConstraints(username, password)
 
         if (!passwordStatus.success) {
             etPassword.error = passwordStatus.message
-        } else {
+            thereAreNoErrors = false
+        }
+        if (username.isBlank()) {
+            etUsername.error = getString(R.string.usernameEmptyMessage)
+            thereAreNoErrors = false
+        }
+        if (firstName.isBlank()) {
+            etFirstName.error = getString(R.string.firstNameEmptyMessage)
+            thereAreNoErrors = false
+        }
+        if (lastName.isBlank()) {
+            etLastName.error = getString(R.string.lastNameEmpyMessage)
+            thereAreNoErrors = false
+        }
+        if (email.isBlank()) {
+            etEmail.error = getString(R.string.emailEmptyMessage)
+            thereAreNoErrors = false
+        }
+        if (password != etConfirm.text.toString()) {
+            etConfirm.error = getString(R.string.wrongConfirmPassword)
+            thereAreNoErrors = false
+        }
+
+        if (thereAreNoErrors) {
             val type = "Register"
-            if (password == etConfirm.text.toString()) {
-                btnRegister.visibility = View.INVISIBLE
-                val backgroundWorker = BackgroundWorker(WeakReference(this), getString(R.string.registrationStatus), this, WeakReference(registerProgress))
-                backgroundWorker.execute(type, etFirstName.text.toString(), etLastName.text.toString(), username, password)
-            } else {
-                etConfirm.error = getString(R.string.wrongConfirmPassword)
-            }
+            btnRegister.visibility = View.INVISIBLE
+            val backgroundWorker = BackgroundWorker(
+                    WeakReference(this),
+                    getString(R.string.registrationStatus),
+                    this,
+                    WeakReference(registerProgress)
+            )
+            backgroundWorker.execute(type, firstName, lastName, username, password)
         }
     }
 
