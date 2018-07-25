@@ -20,7 +20,13 @@ class MainMenuActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        (application as MyApp).isActivityInForeground = false
         userSession.checkLogin()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (application as MyApp).isActivityInForeground = true
     }
 
     override fun onBackPressed() {

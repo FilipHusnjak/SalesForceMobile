@@ -88,4 +88,6 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
         userSession.logoutUser()
     }
 
+
+
 }

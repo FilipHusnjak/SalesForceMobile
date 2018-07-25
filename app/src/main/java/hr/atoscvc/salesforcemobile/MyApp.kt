@@ -10,6 +10,8 @@ class MyApp : Application() {
 
     private lateinit var timer: Timer
 
+    var isActivityInForeground = true
+
     fun startUserSession() {
         cancelTimer()
         timer = Timer()
@@ -32,6 +34,8 @@ class MyApp : Application() {
     fun onUserInteracted() {
         startUserSession()
     }
+
+
 
 }
 
