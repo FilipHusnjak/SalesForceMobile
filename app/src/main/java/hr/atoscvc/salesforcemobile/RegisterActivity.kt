@@ -153,7 +153,7 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
     override fun processFinish(output: String) {
         btnRegister.visibility = View.VISIBLE
         if (output.contains("successful")) {
-            userSession.createLoginSession(username, password)
+            userSession.createLoginSession(username, password, false)
 
             (application as MyApp).startUserSession()
 
