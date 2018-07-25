@@ -18,7 +18,7 @@
     <string name="loginStatus">Login status</string>
     <string name="usernameEmptyMessage">Username cannot be empty</string>
     <string name="firstNameEmptyMessage">First name cannot be empty</string>
-    <string name="lastNameEmpyMessage">Last name cannot be empty</string>
+    <string name="lastNameEmptyMessage">Last name cannot be empty</string>
     <string name="emailEmptyMessage">E-mail cannot be empty</string>
     <string name="registration">Registration</string>
     <string name="FirstName">First Name</string>
@@ -28,4 +28,7 @@
     <string name="Password">Password</string>
     <string name="ConfirmPassword">Confirm password</string>
     <string name="Register">Register</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="rememberMe">Remember me</string>
 </resources>

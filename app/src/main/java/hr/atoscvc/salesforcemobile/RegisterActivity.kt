@@ -1,7 +1,6 @@
 package hr.atoscvc.salesforcemobile
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
@@ -120,7 +119,7 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
             thereAreNoErrors = false
         }
         if (lastName.isBlank()) {
-            etLastName.error = getString(R.string.lastNameEmpyMessage)
+            etLastName.error = getString(R.string.lastNameEmptyMessage)
             thereAreNoErrors = false
         }
         if (email.isBlank()) {
