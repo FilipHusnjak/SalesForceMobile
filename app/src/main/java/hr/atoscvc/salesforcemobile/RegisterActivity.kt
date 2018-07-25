@@ -91,6 +91,7 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             etUsername.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_action_username, 0, 0, 0)
+            //TODO Find and add more icons, use XML methods
         }
     }
 
