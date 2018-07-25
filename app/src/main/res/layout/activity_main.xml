@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_test"
+    android:backgroundTint="@color/colorPrimaryDark"
+    android:backgroundTintMode="add"
     tools:context=".MainActivity">
 
     <TextView
@@ -113,4 +116,5 @@
         android:text="Remember me"
         app:layout_constraintBottom_toTopOf="@+id/btnLogin"
         app:layout_constraintStart_toStartOf="@+id/etPassword" />
+
 </android.support.constraint.ConstraintLayout>
