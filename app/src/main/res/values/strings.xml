@@ -20,4 +20,12 @@
     <string name="firstNameEmptyMessage">First name cannot be empty</string>
     <string name="lastNameEmpyMessage">Last name cannot be empty</string>
     <string name="emailEmptyMessage">E-mail cannot be empty</string>
+    <string name="registration">Registration</string>
+    <string name="FirstName">First Name</string>
+    <string name="LastName">Last Name</string>
+    <string name="Username">Username</string>
+    <string name="Email">E-mail</string>
+    <string name="Password">Password</string>
+    <string name="ConfirmPassword">Confirm password</string>
+    <string name="Register">Register</string>
 </resources>
