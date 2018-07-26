@@ -29,6 +29,7 @@
     <string name="ConfirmPassword">Confirm Password</string>
     <string name="Register">Register</string>
     <string name="login">Login</string>
-    <string name="register">Register</string>
     <string name="rememberMe">Remember me</string>
+    <string name="clickHereToRegister"><a href="">Don\'t have an account?</a></string>
+    <string name="forgotPassword"><a href="">Forgot your password?</a></string>
 </resources>
