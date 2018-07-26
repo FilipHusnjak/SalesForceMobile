@@ -1,6 +1,6 @@
 package hr.atoscvc.salesforcemobile
 
-import android.accounts.AccountManager.KEY_PASSWORD
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -8,23 +8,23 @@ import android.content.SharedPreferences
 
 class SessionManager(private var context: Context) {
 
-    var pref: SharedPreferences
-    var editor: SharedPreferences.Editor
-    lateinit var savedData: String
-    var savedBool: Boolean = false
-    private var PRIVATE_MODE: Int = 0
+    private val pref: SharedPreferences
+    private val editor: SharedPreferences.Editor
+    private lateinit var savedData: String
+    private var savedBool: Boolean = false
 
     init {
-        pref = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE)
-        editor = pref.edit()    //TODO LUKA FER tutorial
+        pref = context.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE)
+        editor = pref.edit()
+        editor.apply()
     }
 
     companion object {
-        val PREF_NAME: String = "LoginData"
-        val IS_LOGIN: String = "isLoggedIn"
-        val KEY_USERNAME: String = "username"
-        val KEY_PASSWORD: String = "password"
-        val KEY_SAVE: String = "save"
+        const val PREF_NAME: String = "LoginData"
+        const val IS_LOGIN: String = "isLoggedIn"
+        const val KEY_USERNAME: String = "username"
+        const val KEY_PASSWORD: String = "password"
+        const val KEY_SAVE: String = "save"
     }
 
     fun createLoginSession(username: String, passwordHash: String, save: Boolean) {
