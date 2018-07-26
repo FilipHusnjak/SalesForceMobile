@@ -67,53 +67,6 @@
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="215dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:onClick="onLogin"
-        android:text="@string/login"
-        app:layout_constraintBottom_toTopOf="@+id/btnRegister"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btnRegister"
-        android:layout_width="215dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="200dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:onClick="onRegister"
-        android:text="@string/register"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ProgressBar
-        android:id="@+id/loginProgress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="3dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/btnRegister"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbSave" />
-
     <CheckBox
         android:id="@+id/cbSave"
         android:layout_width="wrap_content"
@@ -122,5 +75,61 @@
         android:text="@string/rememberMe"
         app:layout_constraintBottom_toTopOf="@+id/btnLogin"
         app:layout_constraintStart_toStartOf="@+id/etPassword" />
+
+    <TextView
+        android:id="@+id/tvForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="onForgotPassword"
+        android:text="@string/forgotPassword"
+        app:layout_constraintBaseline_toBaselineOf="@+id/cbSave"
+        app:layout_constraintEnd_toEndOf="@+id/etPassword" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="215dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:onClick="onLogin"
+        android:text="@string/login"
+        app:layout_constraintBottom_toTopOf="@+id/tvRegister"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="200dp"
+        android:autoLink="all"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="onRegister"
+        android:text="@string/clickHereToRegister"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/loginProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbSave" />
 
 </android.support.constraint.ConstraintLayout>
