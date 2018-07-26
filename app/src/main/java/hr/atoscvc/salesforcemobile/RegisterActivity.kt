@@ -9,19 +9,26 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import hr.atoscvc.salesforcemobile.BackgroundWorker.AsyncResponse
-import hr.atoscvc.salesforcemobile.R.string.password
-import hr.atoscvc.salesforcemobile.RegisterActivity.CheckPasswordConstraints.checkPasswordConstraints
+import hr.atoscvc.salesforcemobile.CheckPasswordConstraints.checkPasswordConstraints
 import kotlinx.android.synthetic.main.activity_register.*
-import org.walleth.sha3.calculateSHA3
 import java.lang.ref.WeakReference
 
+//TODO Login password prima empty - NE SMIJE TO RADIT
+//TODO Buttoni su fakat ruzni
+//TODO Ikonice koje mijenjaju boju na fokus change
+//TODO Activity za change password - old password + new + confirm
+//TODO make scrollable - ocajno kad je landscape mode
+//TODO Do you want to exit - yes -> i dalje trosi 180 MB RAM-a dok se ne ubije rucno
+//TODO kako ispravno dodati sliku (background ostaje kad se ubije login/register activity)
+
+//TODO Python line counter
 
 class RegisterActivity : AppCompatActivity(), AsyncResponse {
 
     private lateinit var userSession: SessionManager
 
     lateinit var username: String
-    lateinit var passwordHashed: String
+    private lateinit var passwordHashed: String
     lateinit var firstName: String
     lateinit var lastName: String
     lateinit var email: String
@@ -50,34 +57,6 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
         }
     }
 
-    object CheckPasswordConstraints {
-        fun checkPasswordConstraints(user: String, pass: String): PasswordErrors {
-            if (pass.length < 8) {
-                return PasswordErrors("Password must be at least 8 characters long", false)
-            }
-            if (pass.length > 30) {
-                return PasswordErrors("Password cannot contain more than 30 characters", false)
-            }
-            if (user.isNotEmpty() && pass.contains(user, true)) {
-                return PasswordErrors("Password must not contain the username", false)
-            }
-            if (user.contains(pass, true)) {
-                return PasswordErrors("Username must not contain the password", false)
-            }
-            if (!pass.matches(".*[A-Z].*".toRegex())) {
-                return PasswordErrors("Password must contain at least one uppercase letter", false)
-            }
-            if (!pass.matches(".*[a-z].*".toRegex())) {
-                return PasswordErrors("Password must contain at least one lowercase letter", false)
-            }
-            if (!pass.matches(".*\\d.*".toRegex())) {
-                return PasswordErrors("Password must contain at least one digit", false)
-            }
-
-            return PasswordErrors("Password is fine.", true)
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -89,6 +68,27 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
 
         etUsername.addTextChangedListener(PasswordTextWatcher(etUsername, etPassword))
         etPassword.addTextChangedListener(PasswordTextWatcher(etUsername, etPassword))
+
+        etFirstName.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                etFirstName.setText(etFirstName.text.toString().trim())
+            }
+        }
+        etLastName.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                etLastName.setText(etLastName.text.toString().trim())
+            }
+        }
+        etUsername.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                etUsername.setText(etUsername.text.toString().trim())
+            }
+        }
+        etEmail.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                etEmail.setText(etEmail.text.toString().trim())
+            }
+        }
     }
 
     override fun onResume() {
@@ -100,11 +100,11 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
     fun onRegister(@Suppress("UNUSED_PARAMETER") view: View) {
         var thereAreNoErrors = true
 
-        username = etUsername.text.toString()
-        val password = etPassword.text.toString()
-        firstName = etFirstName.text.toString()
-        lastName = etLastName.text.toString()
-        email = etEmail.text.toString()
+        val password = etPassword.text.toString()       // Do NOT trim the password
+        firstName = etFirstName.text.toString().trim()
+        lastName = etLastName.text.toString().trim()
+        username = etUsername.text.toString().trim()
+        email = etEmail.text.toString().trim()
 
         val passwordStatus = checkPasswordConstraints(username, password)
 

@@ -12,11 +12,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.ref.WeakReference
 
 class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
-    //TODO Forgot my password - novi random na mail - reset on first login - boolean u bazi
 
     private lateinit var userSession: SessionManager
     lateinit var username: String
-    lateinit var passwordHash: String
+    private lateinit var passwordHash: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,9 +35,26 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
             cbSave.isChecked = true
         }
 
+        etUsername.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                val username = etUsername.text.toString().trim()
+                etUsername.setText(username)
+
+                if (username.isBlank()) {
+                    etUsername.error = getString(R.string.usernameEmptyMessage)
+                }
+            }
+        }
+
+        etPassword.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus && etPassword.text.isBlank()) {
+                etPassword.error = getString(R.string.passwordEmptyMessage)
+            }
+        }
+
         loginProgress.visibility = INVISIBLE
         btnLogin.visibility = VISIBLE
-        btnRegister.visibility = VISIBLE
+        tvRegister.visibility = VISIBLE
     }
 
     override fun onResume() {
@@ -46,7 +62,7 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
 
         loginProgress.visibility = INVISIBLE
         btnLogin.visibility = VISIBLE
-        btnRegister.visibility = VISIBLE
+        tvRegister.visibility = VISIBLE
 
         if (userSession.isLoggedIn()) {
             (application as MyApp).startUserSession()
@@ -56,24 +72,46 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        // if()
-    }
-
     fun onLogin(@Suppress("UNUSED_PARAMETER") view: View) {
-        btnLogin.visibility = INVISIBLE
-        btnRegister.visibility = INVISIBLE
-        username = etUsername.text.toString()
-        passwordHash = HashSHA3.getHashedValue(etPassword.text.toString())
-        val operation = "Login"
-        val backgroundWorker = BackgroundWorker(WeakReference(this), getString(R.string.loginStatus), this, WeakReference(loginProgress))
-        backgroundWorker.execute(operation, username, passwordHash)
+        username = etUsername.text.toString().trim()
+        val tempPass = etPassword.text.toString()       // Do NOT trim the password
+
+        var thereAreNoErrors = true
+
+        if (username.isBlank()) {
+            etUsername.error = getString(R.string.usernameEmptyMessage)
+            thereAreNoErrors = false
+        }
+        if (tempPass.isBlank()) {
+            etPassword.error = getString(R.string.passwordEmptyMessage)
+            thereAreNoErrors = false
+        }
+
+        if (thereAreNoErrors) {
+            btnLogin.visibility = INVISIBLE
+            tvRegister.visibility = INVISIBLE
+
+            passwordHash = HashSHA3.getHashedValue(tempPass)
+
+            val operation = "Login"
+            val backgroundWorker = BackgroundWorker(
+                    WeakReference(this),
+                    getString(R.string.loginStatus),
+                    this,
+                    WeakReference(loginProgress)
+            )
+            backgroundWorker.execute(operation, username, passwordHash)
+        }
     }
 
     fun onRegister(@Suppress("UNUSED_PARAMETER") view: View) {
         val intent = Intent(this, RegisterActivity::class.java)
         startActivityForResult(intent, 0)
+    }
+
+    fun onForgotPassword(@Suppress("UNUSED_PARAMETER") view: View) {
+        Toast.makeText(this, "Clicked!", Toast.LENGTH_SHORT).show()
+        //TODO Za forgot my password napraviti kao alertbox s username i email
     }
 
     override fun processFinish(output: String) {
@@ -87,7 +125,7 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
             finish()
         } else {
             btnLogin.visibility = VISIBLE
-            btnRegister.visibility = VISIBLE
+            tvRegister.visibility = VISIBLE
             Toast.makeText(this, output, Toast.LENGTH_SHORT).show()
         }
     }
@@ -102,6 +140,4 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
         userSession.logoutUserData()
         userSession.logoutUserView()
     }
-
-
 }
