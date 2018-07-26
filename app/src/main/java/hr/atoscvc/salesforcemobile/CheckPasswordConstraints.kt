@@ -14,11 +14,11 @@ object CheckPasswordConstraints {
         if (user.contains(pass, true)) {
             return RegisterActivity.PasswordErrors("Username must not contain the password", false)
         }
-        if (!pass.matches(".*[A-Z].*".toRegex())) {
-            return RegisterActivity.PasswordErrors("Password must contain at least one uppercase letter", false)
-        }
         if (!pass.matches(".*[a-z].*".toRegex())) {
             return RegisterActivity.PasswordErrors("Password must contain at least one lowercase letter", false)
+        }
+        if (!pass.matches(".*[A-Z].*".toRegex())) {
+            return RegisterActivity.PasswordErrors("Password must contain at least one uppercase letter", false)
         }
         if (!pass.matches(".*\\d.*".toRegex())) {
             return RegisterActivity.PasswordErrors("Password must contain at least one digit", false)
