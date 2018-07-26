@@ -13,7 +13,6 @@ import hr.atoscvc.salesforcemobile.CheckPasswordConstraints.checkPasswordConstra
 import kotlinx.android.synthetic.main.activity_register.*
 import java.lang.ref.WeakReference
 
-//TODO Login password prima empty - NE SMIJE TO RADIT
 //TODO Buttoni su fakat ruzni
 //TODO Ikonice koje mijenjaju boju na fokus change
 //TODO Activity za change password - old password + new + confirm
