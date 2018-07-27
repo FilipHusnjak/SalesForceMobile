@@ -1,6 +1,7 @@
 package hr.atoscvc.salesforcemobile
 
 import android.content.Intent
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
@@ -9,6 +10,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import hr.atoscvc.salesforcemobile.BackgroundWorker.AsyncResponse
+import hr.atoscvc.salesforcemobile.BitmapManager.decodeSampledBitmapFromResource
 import hr.atoscvc.salesforcemobile.CheckPasswordConstraints.checkPasswordConstraints
 import kotlinx.android.synthetic.main.activity_register.*
 import java.lang.ref.WeakReference
@@ -119,10 +121,28 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        try {
+            if (!(application as MyApp).bitmapBackground.isRecycled) {
+                (application as MyApp).bitmapBackground.recycle()
+            }
+        } catch (e: Exception) {
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         registerProgress.visibility = View.INVISIBLE
         btnRegister.visibility = View.VISIBLE
+
+        (application as MyApp).bitmapBackground = decodeSampledBitmapFromResource(
+                resources,
+                R.drawable.background_test,
+                resources.displayMetrics.widthPixels,
+                resources.displayMetrics.heightPixels
+        )
+        registerLayout.background = BitmapDrawable(resources, (application as MyApp).bitmapBackground)
     }
 
     fun onRegister(@Suppress("UNUSED_PARAMETER") view: View) {
