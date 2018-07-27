@@ -142,7 +142,7 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
                     this,
                     WeakReference(registerProgress)
             )
-            backgroundWorker.execute(type, firstName, lastName, username, passwordHashed)
+            backgroundWorker.execute(type, firstName, lastName, username, email, passwordHashed)
         }
     }
 
