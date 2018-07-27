@@ -32,8 +32,10 @@ class BackgroundWorker(
         val type: String = p0[0]
         val loginURL = context.get()?.getString(R.string.loginURL)
         val registerURL = context.get()?.getString(R.string.registerURL)
-        if (type == context.get()?.getString(R.string.typeLogin)) {
-            try {
+        val resetPasswordURL = context.get()?.getString(R.string.resetPasswordURL)
+
+        when (type) {
+            context.get()?.getString(R.string.typeLogin) -> try {
                 val username: String = p0[1]
                 val passwordHash: String = p0[2]
 
@@ -53,8 +55,7 @@ class BackgroundWorker(
                 return context.get()?.getString(R.string.exceptionIO)!!
             }
 
-        } else if (type == context.get()?.getString(R.string.typeRegister)) {
-            try {
+            context.get()?.getString(R.string.typeRegister) -> try {
                 val firstName: String = p0[1]
                 val lastName: String = p0[2]
                 val username: String = p0[3]
@@ -80,6 +81,26 @@ class BackgroundWorker(
                 return context.get()?.getString(R.string.exceptionIO)!!
             }
 
+            context.get()?.getString(R.string.typePasswordReset) -> try {
+                val username: String = p0[1]
+                val email: String = p0[2]
+
+                val postData: String = URLEncoder.encode(context.get()?.getString(R.string.username), context.get()?.getString(R.string.UTF8)) + "=" + URLEncoder.encode(username, context.get()?.getString(R.string.UTF8)) + "&" +
+                        URLEncoder.encode(context.get()?.getString(R.string.email), context.get()?.getString(R.string.UTF8)) + "=" + URLEncoder.encode(email, context.get()?.getString(R.string.UTF8))
+
+
+                val url: URL = NetworkUtils.buildUrl(resetPasswordURL!!)
+
+                return NetworkUtils.getResponseFromHttpUrl(url, postData)
+                        ?: return context.get()?.getString(R.string.serverNoResponse)!!
+
+            } catch (e: MalformedURLException) {
+                e.printStackTrace()
+                return context.get()?.getString(R.string.malformedURL)!!
+            } catch (e: IOException) {
+                e.printStackTrace()
+                return context.get()?.getString(R.string.exceptionIO)!!
+            }
         }
         return context.get()?.getString(R.string.typeNotRecognized)!!
     }

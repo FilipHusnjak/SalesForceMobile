@@ -14,33 +14,37 @@ object NetworkUtils {
     @Throws(IOException::class)
     fun getResponseFromHttpUrl(url: URL?, postData: String): String? {
 
-        val httpURLConnection = url?.openConnection() as HttpURLConnection
+        val httpURLConnection: HttpURLConnection? = url?.openConnection() as HttpURLConnection
 
-        httpURLConnection.requestMethod = "POST"
-        httpURLConnection.doOutput = true
-        httpURLConnection.doInput = true
+        if (httpURLConnection != null) {
+            httpURLConnection.requestMethod = "POST"
+            httpURLConnection.doOutput = true
+            httpURLConnection.doInput = true
 
-        val outputStream: OutputStream? = httpURLConnection.outputStream
-        val bufferedWriter = BufferedWriter(OutputStreamWriter(outputStream, "UTF-8"))
+            val outputStream: OutputStream? = httpURLConnection.outputStream
+            val bufferedWriter = BufferedWriter(OutputStreamWriter(outputStream, "UTF-8"))
 
-        bufferedWriter.write(postData)
-        bufferedWriter.flush()
-        bufferedWriter.close()
-        outputStream?.close()
+            bufferedWriter.write(postData)
+            bufferedWriter.flush()
+            bufferedWriter.close()
+            outputStream?.close()
 
-        val inputStream: InputStream? = httpURLConnection.inputStream
-        val bufferedReader = BufferedReader(InputStreamReader(inputStream, "iso-8859-1"))
-        var result = ""
-        for (line in bufferedReader.readLines()) {
-            result += line
+            val inputStream: InputStream? = httpURLConnection.inputStream
+            val bufferedReader = BufferedReader(InputStreamReader(inputStream, "iso-8859-1"))
+            var result = ""
+            for (line in bufferedReader.readLines()) {
+                result += line
+            }
+
+            bufferedReader.close()
+            inputStream?.close()
+
+            httpURLConnection.disconnect()
+
+            return result
         }
 
-        bufferedReader.close()
-        inputStream?.close()
-
-        httpURLConnection.disconnect()
-
-        return result
+        return null
 
     }
 }
