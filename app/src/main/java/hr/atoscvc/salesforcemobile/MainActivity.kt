@@ -1,12 +1,16 @@
 package hr.atoscvc.salesforcemobile
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import hr.atoscvc.salesforcemobile.BackgroundWorker.AsyncResponse
 import hr.atoscvc.salesforcemobile.BitmapManager.decodeSampledBitmapFromResource
@@ -18,6 +22,10 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
     private lateinit var userSession: SessionManager
     lateinit var username: String
     private lateinit var passwordHash: String
+    private lateinit var alertDialogBuilder: AlertDialog.Builder
+    private lateinit var alertDialog: AlertDialog
+    private lateinit var resetPasswordView: View
+    private lateinit var operation: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -123,7 +131,7 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
 
             passwordHash = HashSHA3.getHashedValue(tempPass)
 
-            val operation = "Login"
+            operation = "Login"
             val backgroundWorker = BackgroundWorker(
                     WeakReference(this),
                     getString(R.string.loginStatus),
@@ -139,24 +147,74 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
         startActivityForResult(intent, 0)
     }
 
+    @SuppressLint("InflateParams")
     fun onForgotPassword(@Suppress("UNUSED_PARAMETER") view: View) {
-        Toast.makeText(this, "Clicked!", Toast.LENGTH_SHORT).show()
-        //TODO Za forgot my password napraviti kao alertbox s username i email
+        resetPasswordView = layoutInflater.inflate(R.layout.reset_password, null)
+
+        alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialog = alertDialogBuilder.create()
+        alertDialog.setView(resetPasswordView)
+        alertDialog.show()
+    }
+
+    fun onSendEmail(@Suppress("UNUSED_PARAMETER") view: View) {
+        val etUsername: EditText = resetPasswordView.findViewById(R.id.etUsername)
+        val etEmail: EditText = resetPasswordView.findViewById(R.id.etEmail)
+
+        var thereAreNoErrors = true
+
+        val username = etUsername.text.toString()
+        val email = etEmail.text.toString()
+
+        if (username.isBlank()) {
+            etUsername.error = getString(R.string.usernameEmptyMessage)
+            thereAreNoErrors = false
+        }
+
+        if (email.isBlank()) {
+            etEmail.error = getString(R.string.emailEmptyMessage)
+            thereAreNoErrors = false
+        }
+
+        if (thereAreNoErrors) {
+            (resetPasswordView.findViewById(R.id.btnSend) as Button).visibility = INVISIBLE
+            operation = "PasswordReset"
+            val backgroundWorker = BackgroundWorker(
+                    WeakReference(this),
+                    getString(R.string.loginStatus),
+                    this,
+                    WeakReference(loginProgress)
+            )
+            backgroundWorker.execute(operation, username, email)
+        }
     }
 
     override fun processFinish(output: String) {
-        if (output.contains("Welcome")) {
-            userSession.createLoginSession(username, passwordHash, cbSave.isChecked)
+        when {
+            output.contains("Welcome") -> {
+                userSession.createLoginSession(username, passwordHash, cbSave.isChecked)
 
-            (application as MyApp).startUserSession()
+                (application as MyApp).startUserSession()
 
-            val intent = Intent(this, MainMenuActivity::class.java)
-            startActivity(intent)
-            finish()
-        } else {
-            btnLogin.visibility = VISIBLE
-            tvRegister.visibility = VISIBLE
-            Toast.makeText(this, output, Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, MainMenuActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+            output.contains("Success") -> {
+                (resetPasswordView.findViewById(R.id.btnSend) as Button).visibility = INVISIBLE
+                Toast.makeText(this, "Check your email", Toast.LENGTH_LONG).show()
+                alertDialog.dismiss()
+            }
+            else -> {
+                if (operation == getString(R.string.typeLogin)) {
+                    btnLogin.visibility = VISIBLE
+                    tvRegister.visibility = VISIBLE
+                } else {
+                    (resetPasswordView.findViewById(R.id.btnSend) as Button).visibility = VISIBLE
+                }
+
+                Toast.makeText(this, output, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

@@ -2,6 +2,7 @@
     <string name="app_name">Sales Force Mobile</string>
     <string name="loginURL">http://atoscvc.000webhostapp.com/login.php</string>
     <string name="registerURL">http://atoscvc.000webhostapp.com/register.php</string>
+    <string name="resetPasswordURL">http://atoscvc.000webhostapp.com/resetPassword.php</string>
     <string name="serverNoResponse">No response from server</string>
     <string name="malformedURL">Malformed URL exception!</string>
     <string name="exceptionIO">IO exception</string>
@@ -34,4 +35,5 @@
     <string name="rememberMe">Remember me</string>
     <string name="clickHereToRegister"><a href="">Don\'t have an account?</a></string>
     <string name="forgotPassword"><a href="">Forgot your password?</a></string>
+    <string name="typePasswordReset">PasswordReset</string>
 </resources>
