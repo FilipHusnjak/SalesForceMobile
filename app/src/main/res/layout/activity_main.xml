@@ -19,7 +19,6 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:fontFamily="sans-serif"
         android:text="@string/login"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -37,9 +36,9 @@
         android:layout_marginLeft="65dp"
         android:layout_marginRight="65dp"
         android:layout_marginStart="65dp"
-        android:drawableLeft="@drawable/ic_action_person_outline"
+        android:drawableLeft="@drawable/ic_action_username_outline"
         android:drawablePadding="8dp"
-        android:drawableStart="@drawable/ic_action_person_outline"
+        android:drawableStart="@drawable/ic_action_username_outline"
         android:ems="10"
         android:hint="@string/Username"
         android:inputType="textPersonName"
@@ -91,7 +90,7 @@
 
     <Button
         android:id="@+id/btnLogin"
-        android:layout_width="215dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         android:layout_marginEnd="8dp"
