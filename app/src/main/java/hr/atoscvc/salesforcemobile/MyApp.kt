@@ -18,7 +18,7 @@ class MyApp : Application() {
                 listener.onSessionTimeout()
             }
 
-        }, 5000)
+        }, 30000)    //TODO Staviti normalnu vrijednost
     }
 
     fun cancelTimer() {
