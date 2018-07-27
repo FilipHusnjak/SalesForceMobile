@@ -65,27 +65,56 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
         registerProgress.visibility = View.INVISIBLE
         btnRegister.visibility = View.VISIBLE
 
+        /* Listeners reporting password constraints errors on every change of username or password */
         etUsername.addTextChangedListener(PasswordTextWatcher(etUsername, etPassword))
         etPassword.addTextChangedListener(PasswordTextWatcher(etUsername, etPassword))
 
+        /* Listeners trimming user input (it is trimmed again before being sent to the database) and changing icon color */
         etFirstName.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 etFirstName.setText(etFirstName.text.toString().trim())
+                etFirstName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_smile, 0, 0, 0)
+            } else {
+                etFirstName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_smile_accent, 0, 0, 0)
             }
         }
         etLastName.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 etLastName.setText(etLastName.text.toString().trim())
+                etLastName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_smile, 0, 0, 0)
+            } else {
+                etLastName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_smile_accent, 0, 0, 0)
             }
         }
         etUsername.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 etUsername.setText(etUsername.text.toString().trim())
+                etUsername.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_username_outline, 0, 0, 0)
+            } else {
+                etUsername.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_username_outline_accent, 0, 0, 0)
             }
         }
         etEmail.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 etEmail.setText(etEmail.text.toString().trim())
+                etEmail.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_email_outline, 0, 0, 0)
+            } else {
+                etEmail.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_email_outline_accent, 0, 0, 0)
+            }
+        }
+        // Passwords are NOT trimmed
+        etPassword.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                etPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_password_outline, 0, 0, 0)
+            } else {
+                etPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_password_outline_accent, 0, 0, 0)
+            }
+        }
+        etConfirm.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                etConfirm.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_password_outline, 0, 0, 0)
+            } else {
+                etConfirm.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_password_outline_accent, 0, 0, 0)
             }
         }
     }

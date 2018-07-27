@@ -39,17 +39,26 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
             if (!hasFocus) {
                 val username = etUsername.text.toString().trim()
                 etUsername.setText(username)
+                etUsername.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_username_outline, 0, 0, 0)
 
                 if (username.isBlank()) {
                     etUsername.error = getString(R.string.usernameEmptyMessage)
                 }
+            } else {
+                etUsername.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_username_outline_accent, 0, 0, 0)
             }
         }
 
         etPassword.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus && etPassword.text.isBlank()) {
-                etPassword.error = getString(R.string.passwordEmptyMessage)
+            if (!hasFocus) {
+                etPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_password_outline, 0, 0, 0)
+                if (etPassword.text.isBlank()) {
+                    etPassword.error = getString(R.string.passwordEmptyMessage)
+                }
+            } else {
+                etPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_password_outline_accent, 0, 0, 0)
             }
+
         }
 
         loginProgress.visibility = INVISIBLE
