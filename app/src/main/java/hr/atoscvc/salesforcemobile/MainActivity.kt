@@ -22,6 +22,10 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
         setContentView(R.layout.activity_main)
 
         if (intent.getBooleanExtra("EXIT", false)) {
+            val homeIntent = Intent(Intent.ACTION_MAIN)
+            homeIntent.addCategory(Intent.CATEGORY_HOME)
+            homeIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(homeIntent)
             finish()
         }
 
