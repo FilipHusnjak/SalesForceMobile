@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Login and Register Activity theme. -->
+    <style name="LoginRegisterScreen" parent="AppTheme">
+        <item name="buttonStyle">@style/Widget.AppCompat.Button.Colored</item>
+    </style>
+
 </resources>
