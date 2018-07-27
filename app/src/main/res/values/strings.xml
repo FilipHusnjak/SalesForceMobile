@@ -10,6 +10,7 @@
     <string name="typeLogin">Login</string>
     <string name="typeRegister">Register</string>
     <string name="username">username</string>
+    <string name="email">email</string>
     <string name="password">password</string>
     <string name="firstName">firstName</string>
     <string name="lastName">lastName</string>

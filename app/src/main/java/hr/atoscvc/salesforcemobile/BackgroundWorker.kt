@@ -58,11 +58,13 @@ class BackgroundWorker(
                 val firstName: String = p0[1]
                 val lastName: String = p0[2]
                 val username: String = p0[3]
-                val passwordHash: String = p0[4]
+                val email: String = p0[4]
+                val passwordHash: String = p0[5]
 
                 val postData: String = URLEncoder.encode(context.get()?.getString(R.string.firstName), context.get()?.getString(R.string.UTF8)) + "=" + URLEncoder.encode(firstName, context.get()?.getString(R.string.UTF8)) + "&" +
                         URLEncoder.encode(context.get()?.getString(R.string.lastName), context.get()?.getString(R.string.UTF8)) + "=" + URLEncoder.encode(lastName, context.get()?.getString(R.string.UTF8)) + "&" +
                         URLEncoder.encode(context.get()?.getString(R.string.username), context.get()?.getString(R.string.UTF8)) + "=" + URLEncoder.encode(username, context.get()?.getString(R.string.UTF8)) + "&" +
+                        URLEncoder.encode(context.get()?.getString(R.string.email), context.get()?.getString(R.string.UTF8)) + "=" + URLEncoder.encode(email, context.get()?.getString(R.string.UTF8)) + "&" +
                         URLEncoder.encode(context.get()?.getString(R.string.password), context.get()?.getString(R.string.UTF8)) + "=" + URLEncoder.encode(passwordHash, context.get()?.getString(R.string.UTF8))
 
                 val url: URL = NetworkUtils.buildUrl(registerURL!!)
