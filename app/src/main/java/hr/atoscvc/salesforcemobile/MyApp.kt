@@ -1,13 +1,14 @@
 package hr.atoscvc.salesforcemobile
 
 import android.app.Application
+import android.graphics.Bitmap
 import java.util.*
-
 
 class MyApp : Application() {
 
-    private lateinit var listener: LogoutListener
+    lateinit var bitmapBackground: Bitmap
 
+    private lateinit var listener: LogoutListener
     private lateinit var timer: Timer
 
     fun startUserSession() {
@@ -22,7 +23,9 @@ class MyApp : Application() {
     }
 
     fun cancelTimer() {
-        if (::timer.isInitialized) timer.cancel()
+        if (::timer.isInitialized) {
+            timer.cancel()
+        }
     }
 
     fun registerSessionListener(listener: LogoutListener) {
@@ -32,7 +35,6 @@ class MyApp : Application() {
     fun onUserInteracted() {
         startUserSession()
     }
-
 
 }
 
