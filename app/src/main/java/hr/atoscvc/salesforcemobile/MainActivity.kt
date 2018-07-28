@@ -13,9 +13,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import hr.atoscvc.salesforcemobile.BackgroundWorker.AsyncResponse
-import hr.atoscvc.salesforcemobile.BitmapManager.decodeSampledBitmapFromResource
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.ref.WeakReference
+
 
 class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
 
@@ -81,16 +81,6 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
         tvRegister.visibility = VISIBLE
     }
 
-    override fun onPause() {
-        super.onPause()
-        try {
-            if (!(application as MyApp).bitmapBackground.isRecycled) {
-                (application as MyApp).bitmapBackground.recycle()
-            }
-        } catch (e: Exception) {
-        }
-    }
-
     override fun onResume() {
         super.onResume()
 
@@ -98,13 +88,7 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
         btnLogin.visibility = VISIBLE
         tvRegister.visibility = VISIBLE
 
-        (application as MyApp).bitmapBackground = decodeSampledBitmapFromResource(
-                resources,
-                R.drawable.background_test,
-                resources.displayMetrics.widthPixels,
-                resources.displayMetrics.heightPixels
-        )
-        loginLayout.background = BitmapDrawable(resources, (application as MyApp).bitmapBackground)
+        loginLayout.background = BitmapDrawable(resources, (application as MyApp).getInstance(this))
 
         if (userSession.isLoggedIn()) {
             (application as MyApp).startUserSession()
@@ -113,6 +97,18 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
             finish()
         }
     }
+
+    override fun onPause() {
+        super.onPause()
+        try {
+            if (!(application as MyApp).getInstance(this).isRecycled) {
+                (application as MyApp).getInstance(this).recycle()
+            }
+        } catch (e: Exception) {
+        }
+    }
+
+
 
     fun onLogin(@Suppress("UNUSED_PARAMETER") view: View) {
         username = etUsername.text.toString().trim()
