@@ -19,6 +19,10 @@ import java.lang.ref.WeakReference
 
 class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
 
+    //TODO Luka background Glide
+    //TODO Luka Reset trimming
+    //TODO Posvijetliti background sliku
+
     private lateinit var userSession: SessionManager
     lateinit var username: String
     private lateinit var passwordHash: String
