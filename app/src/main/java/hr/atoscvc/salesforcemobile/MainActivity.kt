@@ -19,9 +19,23 @@ import java.lang.ref.WeakReference
 
 class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
 
-    //TODO Luka background Glide
-    //TODO Luka Reset trimming
-    //TODO Posvijetliti background sliku
+    //TODO Luka - password reset trimming ne valja
+    //TODO Luka - izblijediti background sliku
+    //TODO Luka - reset password nije email type
+    //TODO Luka - bolje dizajnirati password reset (forgot) prozor
+    //TODO Luka - Activity za change password - old password + new + confirm - ChangePasswordActivity.kt (Constraints!)
+    //TODO Luka - make scrollable - ocajno kad je landscape mode
+    //TODO Luka - TESTIRATI MEMORY LEAK FIX
+
+    //TODO Luka - Python line counter
+
+    //TODO Filip - novi password (hard reset) nema nikakve provjere - implementirati u PHP-u
+    //TODO Filip - forgot password loader indicator se trenutno vrti iza prozora pa se ne vidi (?)
+
+    //TODO Do you want to exit - yes -> i dalje trosi 180 MB RAM-a dok se ne ubije rucno
+    //TODO kako ispravno dodati sliku (background ostaje kad se ubije login/register activity)
+
+    //TODO EventLog SQL tablica (EventID primary key + String) - "User $userID forgot his password", "User $userID set a new password", "User $userID changed his password", "User $userID logged in/out"
 
     private lateinit var userSession: SessionManager
     lateinit var username: String

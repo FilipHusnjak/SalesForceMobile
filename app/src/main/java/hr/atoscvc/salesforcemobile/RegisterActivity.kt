@@ -14,15 +14,6 @@ import hr.atoscvc.salesforcemobile.CheckPasswordConstraints.checkPasswordConstra
 import kotlinx.android.synthetic.main.activity_register.*
 import java.lang.ref.WeakReference
 
-//TODO Filip - novi password (hard reset) nema nikakve provjere - implementirati u PHP
-//TODO Luka - bolje dizajnirati password reset prozor
-//TODO Luka - Activity za change password - old password + new + confirm - ChangePasswordActivity.kt (Constraints!)
-//TODO Luka - make scrollable - ocajno kad je landscape mode
-//TODO Do you want to exit - yes -> i dalje trosi 180 MB RAM-a dok se ne ubije rucno
-//TODO kako ispravno dodati sliku (background ostaje kad se ubije login/register activity)
-
-//TODO Python line counter
-//TODO maknuti Glide dependancy ako ga ne koristimo
 
 class RegisterActivity : AppCompatActivity(), AsyncResponse {
 
