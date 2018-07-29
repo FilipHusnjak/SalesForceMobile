@@ -19,7 +19,7 @@ class MyApp : Application() {
                 listener.onSessionTimeout()
             }
 
-        }, 30000)    //TODO Staviti normalnu vrijednost
+        }, 30000)    //TODO Use a normal value
     }
 
     fun cancelTimer() {
@@ -38,7 +38,8 @@ class MyApp : Application() {
 
     fun getInstance(context: Context): Bitmap {
 
-        if (instance == null || instance!!.isRecycled) {
+        // if (instance == null || instance!!.isRecycled) {
+        if (instance == null) {
             instance = BitmapManager.decodeSampledBitmapFromResource(
                     context.resources,
                     R.drawable.background_test,
@@ -50,6 +51,11 @@ class MyApp : Application() {
         return instance as Bitmap
 
     }
+
+    /*fun recycleInstanceAndSetToNull() {
+        instance?.recycle()
+        instance = null
+    }*/
 
 }
 

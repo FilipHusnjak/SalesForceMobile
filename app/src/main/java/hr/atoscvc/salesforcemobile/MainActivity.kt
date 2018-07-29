@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
     //TODO Luka - Activity za change password - old password + new + confirm - ChangePasswordActivity.kt (Constraints!)
     //TODO Luka - make scrollable - ocajno kad je landscape mode
     //TODO Luka - TESTIRATI MEMORY LEAK FIX
+    //TODO Luka - Dodati Log na sve Create/Resume itd.
 
     //TODO Luka - Python line counter
 
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
     //TODO EventLog SQL tablica (EventID primary key + String) - "User $userID forgot his password", "User $userID set a new password", "User $userID changed his password", "User $userID logged in/out"
 
     private lateinit var userSession: SessionManager
-    lateinit var username: String
+    private lateinit var username: String
     private lateinit var passwordHash: String
     private lateinit var alertDialogBuilder: AlertDialog.Builder
     private lateinit var alertDialog: AlertDialog
@@ -111,15 +112,10 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
         }
     }
 
-    override fun onPause() {
+    /*override fun onPause() {
         super.onPause()
-        try {
-            if (!(application as MyApp).getInstance(this).isRecycled) {
-                (application as MyApp).getInstance(this).recycle()
-            }
-        } catch (e: Exception) {
-        }
-    }
+        (application as MyApp).recycleInstanceAndSetToNull()
+    }*/
 
     fun onLogin(@Suppress("UNUSED_PARAMETER") view: View) {
         username = etUsername.text.toString().trim()

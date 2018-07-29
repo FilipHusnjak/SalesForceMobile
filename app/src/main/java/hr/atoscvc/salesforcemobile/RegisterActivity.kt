@@ -112,15 +112,10 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        try {
-            if (!(application as MyApp).getInstance(this).isRecycled) {
-                (application as MyApp).getInstance(this).recycle()
-            }
-        } catch (e: Exception) {
-        }
-    }
+    /* override fun onPause() {
+         super.onPause()
+         (application as MyApp).recycleInstanceAndSetToNull()
+     }*/
 
     override fun onResume() {
         super.onResume()
