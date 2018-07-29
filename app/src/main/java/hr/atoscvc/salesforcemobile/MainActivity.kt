@@ -73,7 +73,6 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
             } else {
                 etPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_password_outline_accent, 0, 0, 0)
             }
-
         }
 
         loginProgress.visibility = INVISIBLE
@@ -107,8 +106,6 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
         } catch (e: Exception) {
         }
     }
-
-
 
     fun onLogin(@Suppress("UNUSED_PARAMETER") view: View) {
         username = etUsername.text.toString().trim()
