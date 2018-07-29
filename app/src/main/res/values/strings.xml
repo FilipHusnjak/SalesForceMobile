@@ -36,4 +36,7 @@
     <string name="clickHereToRegister"><a href="">Don\'t have an account?</a></string>
     <string name="forgotPassword"><a href="">Forgot your password?</a></string>
     <string name="typePasswordReset">PasswordReset</string>
+    <string name="resetPassword">Reset Password</string>
+    <string name="reset">Reset</string>
+    <string name="resetPasswordDescriptionLabel">We will send you an email with a link to reset your password.</string>
 </resources>
