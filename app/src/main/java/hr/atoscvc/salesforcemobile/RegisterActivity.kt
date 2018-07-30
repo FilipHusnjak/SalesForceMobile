@@ -4,10 +4,7 @@ import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
-import android.widget.EditText
 import android.widget.Toast
 import hr.atoscvc.salesforcemobile.BackgroundWorker.AsyncResponse
 import hr.atoscvc.salesforcemobile.CheckPasswordConstraints.checkPasswordConstraints
@@ -24,30 +21,6 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
     lateinit var firstName: String
     lateinit var lastName: String
     lateinit var email: String
-
-    data class PasswordErrors(val message: String, val success: Boolean)
-
-    private class PasswordTextWatcher(val editTextUser: EditText, val editTextPass: EditText) : TextWatcher {
-        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-        override fun afterTextChanged(s: Editable) {}
-
-        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-            val editTextUserString = editTextUser.text.toString()
-            val editTextPassString = editTextPass.text.toString()
-
-            if (editTextPassString.isNotEmpty()) {
-                val isPassGood = checkPasswordConstraints(editTextUserString, editTextPassString)
-                if (!isPassGood.success) {
-                    editTextPass.error = isPassGood.message
-                } else {
-                    editTextPass.error = null
-                }
-            } else {
-                editTextPass.error = null
-            }
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,7 +68,7 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
                 etEmail.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_email_outline_accent, 0, 0, 0)
             }
         }
-        // Passwords are NOT trimmed
+        /* Passwords are NOT trimmed */
         etPassword.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 etPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_password_outline, 0, 0, 0)
@@ -181,7 +154,7 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
     override fun processFinish(output: String) {
         btnRegister.visibility = View.VISIBLE
         if (output.contains("successful")) {
-            userSession.createLoginSession(username, passwordHashed, false)
+            userSession.createLoginSession(username, false)
 
             (application as MyApp).startUserSession()
 
