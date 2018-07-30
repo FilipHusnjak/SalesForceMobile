@@ -6,7 +6,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 
 
-class SessionManager(private var context: Context) {
+class SessionManager(private val context: Context) {
 
     private val pref: SharedPreferences
     private val editor: SharedPreferences.Editor
