@@ -10,18 +10,16 @@ import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import hr.atoscvc.salesforcemobile.BackgroundWorker.AsyncResponse
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.reset_password.*
 import java.lang.ref.WeakReference
 
 
 class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
 
     //LUKA - password reset trimming ne valja
-    //LUKA - izblijediti background sliku
     //LUKA - bolje dizajnirati password reset (forgot) prozor - onfocus boja
     //LUKA - Activity za change password - old password + new + confirm - ChangePasswordActivity.kt (Constraints!)
     //LUKA - make scrollable - ocajno kad je landscape mode
@@ -154,39 +152,35 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
     @SuppressLint("InflateParams")
     fun onForgotPassword(@Suppress("UNUSED_PARAMETER") view: View) {
         resetPasswordView = layoutInflater.inflate(R.layout.reset_password, null)
+        alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialog = alertDialogBuilder.create()
+        alertDialog.setView(resetPasswordView)
+        alertDialog.show()
 
         (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).toggleSoftInput(
                 InputMethodManager.SHOW_FORCED,
                 InputMethodManager.HIDE_IMPLICIT_ONLY
         )
-
-        alertDialogBuilder = AlertDialog.Builder(this)
-        alertDialog = alertDialogBuilder.create()
-        alertDialog.setView(resetPasswordView)
-        alertDialog.show()
     }
 
     fun onSendEmail(@Suppress("UNUSED_PARAMETER") view: View) {
-        val etUsername: EditText = resetPasswordView.findViewById(R.id.etUsername)
-        val etEmail: EditText = resetPasswordView.findViewById(R.id.etEmail)
-
         var thereAreNoErrors = true
 
-        val username = etUsername.text.toString()
-        val email = etEmail.text.toString()
+        val username = etUsernamePassReset.text.toString().trim()
+        val email = etEmailPassReset.text.toString().trim()
 
         if (username.isBlank()) {
-            etUsername.error = getString(R.string.usernameEmptyMessage)
+            etUsernamePassReset.error = getString(R.string.usernameEmptyMessage)
             thereAreNoErrors = false
         }
 
         if (email.isBlank()) {
-            etEmail.error = getString(R.string.emailEmptyMessage)
+            etEmailPassReset.error = getString(R.string.emailEmptyMessage)
             thereAreNoErrors = false
         }
 
         if (thereAreNoErrors) {
-            (resetPasswordView.findViewById(R.id.btnSend) as Button).visibility = INVISIBLE
+            btnSendPassReset.visibility = INVISIBLE
             operation = "PasswordReset"
             val backgroundWorker = BackgroundWorker(
                     WeakReference(this),
@@ -210,7 +204,7 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
                 finish()
             }
             output.contains("Success") -> {
-                (resetPasswordView.findViewById(R.id.btnSend) as Button).visibility = INVISIBLE
+                btnSendPassReset.visibility = INVISIBLE
                 Toast.makeText(this, "Check your email", Toast.LENGTH_LONG).show()
                 alertDialog.dismiss()
             }
@@ -219,7 +213,7 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
                     btnLogin.visibility = VISIBLE
                     tvRegister.visibility = VISIBLE
                 } else {
-                    (resetPasswordView.findViewById(R.id.btnSend) as Button).visibility = VISIBLE
+                    btnSendPassReset.visibility = VISIBLE
                 }
 
                 Toast.makeText(this, output, Toast.LENGTH_SHORT).show()
