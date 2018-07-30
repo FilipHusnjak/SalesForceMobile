@@ -1,10 +1,11 @@
 package hr.atoscvc.salesforcemobile
 
+import android.content.Intent
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main_menu.*
 
 
@@ -17,12 +18,16 @@ class MainMenuActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main_menu)
         userSession = SessionManager(this)
         tvUsername.text = userSession.getUserDetails()[SessionManager.KEY_USERNAME]
-        Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show()
     }
 
     override fun onResume() {
         super.onResume()
         userSession.checkLogin()
+
+        mainMenuLayout.background = BitmapDrawable(
+                applicationContext.resources,
+                (application as MyApp).getInstance(applicationContext.resources)
+        )
     }
 
     override fun onBackPressed() {
@@ -52,6 +57,13 @@ class MainMenuActivity : AppCompatActivity() {
         if (userSession.isLoggedIn()) {
             (application as MyApp).onUserInteracted()
         }
+    }
+
+    //TODO Method should be moved elsewhere
+    //TODO In Manifest: android:parentActivityName=".MainMenuActivity" should be changed accordingly
+    fun onChangePassword(@Suppress("UNUSED_PARAMETER") view: View) {
+        val intent = Intent(this, ChangePasswordActivity::class.java)
+        startActivity(intent)
     }
 
 }
