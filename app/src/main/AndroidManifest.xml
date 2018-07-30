@@ -24,8 +24,15 @@
         </activity>
         <activity
             android:name=".RegisterActivity"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/LoginRegisterScreen" />
-        <activity android:name=".MainMenuActivity" />
+        <activity
+            android:name=".MainMenuActivity"
+            android:theme="@style/LoginRegisterScreen" />
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:parentActivityName=".MainMenuActivity"
+            android:theme="@style/LoginRegisterScreen" />
     </application>
 
 </manifest>
