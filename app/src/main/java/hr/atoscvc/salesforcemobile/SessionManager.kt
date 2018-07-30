@@ -5,7 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 
-
+//FILIP - ako se u Manifestu u MainMenuActivity stavi noHistory=true i stisne Back u Change Password...
+// ...aplikacija se ugasi, a na restartu user ostane ulogiran
 class SessionManager(private val context: Context) {
 
     private val pref: SharedPreferences
@@ -23,14 +24,12 @@ class SessionManager(private val context: Context) {
         const val PREF_NAME: String = "LoginData"
         const val IS_LOGIN: String = "isLoggedIn"
         const val KEY_USERNAME: String = "username"
-        const val KEY_PASSWORD: String = "password"
         const val KEY_SAVE: String = "save"
     }
 
-    fun createLoginSession(username: String, passwordHash: String, save: Boolean) {
+    fun createLoginSession(username: String, save: Boolean) {
         editor.putBoolean(IS_LOGIN, true)
         editor.putString(KEY_USERNAME, username)
-        editor.putString(KEY_PASSWORD, passwordHash)
         editor.putBoolean(KEY_SAVE, save)
         editor.commit()
     }
@@ -41,13 +40,11 @@ class SessionManager(private val context: Context) {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             context.startActivity(intent)
         }
-
     }
 
     fun getUserDetails(): HashMap<String, String> {
         val user: HashMap<String, String> = HashMap()
         user[KEY_USERNAME] = pref.getString(KEY_USERNAME, "")
-        user[KEY_PASSWORD] = pref.getString(KEY_PASSWORD, "")
         return user
     }
 
@@ -64,7 +61,6 @@ class SessionManager(private val context: Context) {
         editor.putBoolean(KEY_SAVE, savedBool)
         editor.putString(KEY_USERNAME, savedData)
         editor.commit()
-
     }
 
     fun logoutUserView() {
