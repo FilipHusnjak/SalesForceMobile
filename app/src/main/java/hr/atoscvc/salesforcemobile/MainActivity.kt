@@ -19,15 +19,13 @@ import java.lang.ref.WeakReference
 
 class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
 
-    //LUKA - password reset trimming ne valja
-    //LUKA - bolje dizajnirati password reset (forgot) prozor - onfocus boja
-    //LUKA - Activity za change password - old password + new + confirm - ChangePasswordActivity.kt (Constraints!)
-    //LUKA - make scrollable - ocajno kad je landscape mode
+    //LUKA - bolje dizajnirati password reset (forgot) prozor - onfocus boja - trimming nije postavljen
+    //LUKA - make scrollable - ocajno kad je landscape mode - bolje fiksirati jedan (nizi) u centar
     //LUKA - Dodati Log na sve Create/Resume itd.
     //LUKA - Python line counter
 
-    //FILIP - novi password (hard reset) nema nikakve provjere - implementirati u PHP-u
-    //FILIP - forgot password loader indicator se trenutno vrti iza prozora pa se ne vidi (?)
+    //FILIP - novi password (hard reset) nema nikakve provjere (CheckPasswordConstraints) - implementirati u JS-u
+    //FILIP - forgot password loader indicator se trenutno vrti iza prozora pa se ne vidi
     //FILIP - EventLog SQL tablica (EventID primary key + String) - "User $userID forgot his password", "User $userID set a new password", "User $userID changed his password", "User $userID logged in/out"
 
     private lateinit var userSession: SessionManager
@@ -195,7 +193,7 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
     override fun processFinish(output: String) {
         when {
             output.contains("Welcome") -> {
-                userSession.createLoginSession(username, passwordHash, cbSave.isChecked)
+                userSession.createLoginSession(username, cbSave.isChecked)
 
                 (application as MyApp).startUserSession()
 
