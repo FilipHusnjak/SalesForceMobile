@@ -13,7 +13,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import hr.atoscvc.salesforcemobile.BackgroundWorker.AsyncResponse
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.reset_password.*
+import kotlinx.android.synthetic.main.reset_password.view.*
 import java.lang.ref.WeakReference
 
 
@@ -135,7 +135,7 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
 
             operation = "Login"
             val backgroundWorker = BackgroundWorker(
-                    WeakReference(this),
+                    WeakReference(applicationContext),
                     getString(R.string.loginStatus),
                     this,
                     WeakReference(loginProgress)
@@ -166,24 +166,24 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
     fun onSendEmail(@Suppress("UNUSED_PARAMETER") view: View) {
         var thereAreNoErrors = true
 
-        val username = etUsernamePassReset.text.toString().trim()
-        val email = etEmailPassReset.text.toString().trim()
+        val username = resetPasswordView.etUsernamePassReset.text.toString().trim()
+        val email = resetPasswordView.etEmailPassReset.text.toString().trim()
 
         if (username.isBlank()) {
-            etUsernamePassReset.error = getString(R.string.usernameEmptyMessage)
+            resetPasswordView.etUsernamePassReset.error = getString(R.string.usernameEmptyMessage)
             thereAreNoErrors = false
         }
 
         if (email.isBlank()) {
-            etEmailPassReset.error = getString(R.string.emailEmptyMessage)
+            resetPasswordView.etEmailPassReset.error = getString(R.string.emailEmptyMessage)
             thereAreNoErrors = false
         }
 
         if (thereAreNoErrors) {
-            btnSendPassReset.visibility = INVISIBLE
+            resetPasswordView.btnSendPassReset.visibility = INVISIBLE
             operation = "PasswordReset"
             val backgroundWorker = BackgroundWorker(
-                    WeakReference(this),
+                    WeakReference(applicationContext),
                     getString(R.string.loginStatus),
                     this,
                     WeakReference(loginProgress)
@@ -204,7 +204,7 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
                 finish()
             }
             output.contains("Success") -> {
-                btnSendPassReset.visibility = INVISIBLE
+                resetPasswordView.btnSendPassReset.visibility = INVISIBLE
                 Toast.makeText(this, "Check your email", Toast.LENGTH_LONG).show()
                 alertDialog.dismiss()
             }
@@ -213,7 +213,7 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
                     btnLogin.visibility = VISIBLE
                     tvRegister.visibility = VISIBLE
                 } else {
-                    btnSendPassReset.visibility = VISIBLE
+                    resetPasswordView.btnSendPassReset.visibility = VISIBLE
                 }
 
                 Toast.makeText(this, output, Toast.LENGTH_SHORT).show()

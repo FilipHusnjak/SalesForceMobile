@@ -12,10 +12,10 @@ import java.net.URLEncoder
 
 
 class BackgroundWorker(
-        private var context: WeakReference<Context>,
-        @Suppress("unused") private var header: String,
-        private var response: AsyncResponse,
-        private var progressBar: WeakReference<ProgressBar>
+        private val context: WeakReference<Context>,
+        @Suppress("unused") private val header: String,
+        private val response: AsyncResponse,
+        private val progressBar: WeakReference<ProgressBar>
 ) : AsyncTask<String, Void, String>() {
 
     interface AsyncResponse {

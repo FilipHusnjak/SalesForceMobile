@@ -169,7 +169,7 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
             passwordHashed = HashSHA3.getHashedValue(password)
             btnRegister.visibility = View.INVISIBLE
             val backgroundWorker = BackgroundWorker(
-                    WeakReference(this),
+                    WeakReference(applicationContext),
                     getString(R.string.registrationStatus),
                     this,
                     WeakReference(registerProgress)
