@@ -96,7 +96,10 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
         btnLogin.visibility = VISIBLE
         tvRegister.visibility = VISIBLE
 
-        loginLayout.background = BitmapDrawable(resources, (application as MyApp).getInstance(this))
+        loginLayout.background = BitmapDrawable(
+                applicationContext.resources,
+                (application as MyApp).getInstance(applicationContext.resources)
+        )
 
         if (userSession.isLoggedIn()) {
             (application as MyApp).startUserSession()

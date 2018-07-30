@@ -1,7 +1,7 @@
 package hr.atoscvc.salesforcemobile
 
 import android.app.Application
-import android.content.Context
+import android.content.res.Resources
 import android.graphics.Bitmap
 import java.util.*
 
@@ -36,15 +36,15 @@ class MyApp : Application() {
         startUserSession()
     }
 
-    fun getInstance(context: Context): Bitmap {
+    fun getInstance(resources: Resources): Bitmap {
 
         // if (instance == null || instance!!.isRecycled) {
         if (instance == null) {
             instance = BitmapManager.decodeSampledBitmapFromResource(
-                    context.resources,
+                    resources,
                     R.drawable.background_test,
-                    context.resources.displayMetrics.widthPixels,
-                    context.resources.displayMetrics.heightPixels
+                    resources.displayMetrics.widthPixels,
+                    resources.displayMetrics.heightPixels
             )
         }
 

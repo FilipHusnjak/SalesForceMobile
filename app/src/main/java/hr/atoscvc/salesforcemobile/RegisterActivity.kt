@@ -122,7 +122,10 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
         registerProgress.visibility = View.INVISIBLE
         btnRegister.visibility = View.VISIBLE
 
-        registerLayout.background = BitmapDrawable(resources, (application as MyApp).getInstance(this))
+        registerLayout.background = BitmapDrawable(
+                applicationContext.resources,
+                (application as MyApp).getInstance(applicationContext.resources)
+        )
     }
 
     fun onRegister(@Suppress("UNUSED_PARAMETER") view: View) {
