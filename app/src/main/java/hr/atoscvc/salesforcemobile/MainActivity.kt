@@ -17,7 +17,6 @@ import java.lang.ref.WeakReference
 
 class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
 
-    //LUKA - Login previsoko!
     //LUKA - Dodati Log na sve Create/Resume itd.
     //LUKA - Python line counter
 
