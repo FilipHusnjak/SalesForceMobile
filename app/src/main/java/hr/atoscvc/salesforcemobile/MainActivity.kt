@@ -17,7 +17,7 @@ import java.lang.ref.WeakReference
 
 class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
 
-    //LUKA - make scrollable - ocajno kad je landscape mode - bolje fiksirati jedan (nizi) u centar
+    //LUKA - Login previsoko!
     //LUKA - Dodati Log na sve Create/Resume itd.
     //LUKA - Python line counter
 
@@ -89,10 +89,15 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
         btnLogin.visibility = View.VISIBLE
         tvRegister.visibility = View.VISIBLE
 
-        loginLayout.background = BitmapDrawable(
+//        loginLayout.background = BitmapDrawable(
+//                applicationContext.resources,
+//                (application as MyApp).getInstance(applicationContext.resources)
+//        )
+
+        window.setBackgroundDrawable(BitmapDrawable(
                 applicationContext.resources,
                 (application as MyApp).getInstance(applicationContext.resources)
-        )
+        ))
 
         if (userSession.isLoggedIn()) {
             (application as MyApp).startUserSession()
