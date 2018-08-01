@@ -7,8 +7,6 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import hr.atoscvc.salesforcemobile.BackgroundWorker.AsyncResponse
@@ -19,7 +17,6 @@ import java.lang.ref.WeakReference
 
 class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
 
-    //LUKA - bolje dizajnirati password reset (forgot) prozor - onfocus boja - trimming nije postavljen
     //LUKA - make scrollable - ocajno kad je landscape mode - bolje fiksirati jedan (nizi) u centar
     //LUKA - Dodati Log na sve Create/Resume itd.
     //LUKA - Python line counter
@@ -80,17 +77,17 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
             }
         }
 
-        loginProgress.visibility = INVISIBLE
-        btnLogin.visibility = VISIBLE
-        tvRegister.visibility = VISIBLE
+        loginProgress.visibility = View.INVISIBLE
+        btnLogin.visibility = View.VISIBLE
+        tvRegister.visibility = View.VISIBLE
     }
 
     override fun onResume() {
         super.onResume()
 
-        loginProgress.visibility = INVISIBLE
-        btnLogin.visibility = VISIBLE
-        tvRegister.visibility = VISIBLE
+        loginProgress.visibility = View.INVISIBLE
+        btnLogin.visibility = View.VISIBLE
+        tvRegister.visibility = View.VISIBLE
 
         loginLayout.background = BitmapDrawable(
                 applicationContext.resources,
@@ -126,8 +123,8 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
         }
 
         if (thereAreNoErrors) {
-            btnLogin.visibility = INVISIBLE
-            tvRegister.visibility = INVISIBLE
+            btnLogin.visibility = View.INVISIBLE
+            tvRegister.visibility = View.INVISIBLE
 
             passwordHash = HashSHA3.getHashedValue(tempPass)
 
@@ -153,6 +150,35 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
         alertDialogBuilder = AlertDialog.Builder(this)
         alertDialog = alertDialogBuilder.create()
         alertDialog.setView(resetPasswordView)
+
+        resetPasswordView.etUsernamePassReset.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                val username = resetPasswordView.etUsernamePassReset.text.toString().trim()
+                resetPasswordView.etUsernamePassReset.setText(username)
+                resetPasswordView.etUsernamePassReset.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_username_outline, 0, 0, 0)
+
+                if (username.isBlank()) {
+                    resetPasswordView.etUsernamePassReset.error = getString(R.string.usernameEmptyMessage)
+                }
+            } else {
+                resetPasswordView.etUsernamePassReset.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_username_outline_accent, 0, 0, 0)
+            }
+        }
+
+        resetPasswordView.etEmailPassReset.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                val email = resetPasswordView.etEmailPassReset.text.toString().trim()
+                resetPasswordView.etEmailPassReset.setText(email)
+                resetPasswordView.etEmailPassReset.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_email_outline, 0, 0, 0)
+
+                if (email.isBlank()) {
+                    resetPasswordView.etEmailPassReset.error = getString(R.string.emailEmptyMessage)
+                }
+            } else {
+                resetPasswordView.etEmailPassReset.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_email_outline_accent, 0, 0, 0)
+            }
+        }
+
         alertDialog.show()
 
         (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).toggleSoftInput(
@@ -178,7 +204,7 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
         }
 
         if (thereAreNoErrors) {
-            resetPasswordView.btnSendPassReset.visibility = INVISIBLE
+            resetPasswordView.btnSendPassReset.visibility = View.INVISIBLE
             operation = "PasswordReset"
             val backgroundWorker = BackgroundWorker(
                     WeakReference(applicationContext),
@@ -202,16 +228,16 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
                 finish()
             }
             output.contains("Success") -> {
-                resetPasswordView.btnSendPassReset.visibility = INVISIBLE
+                resetPasswordView.btnSendPassReset.visibility = View.INVISIBLE
                 Toast.makeText(this, "Check your email", Toast.LENGTH_LONG).show()
                 alertDialog.dismiss()
             }
             else -> {
                 if (operation == getString(R.string.typeLogin)) {
-                    btnLogin.visibility = VISIBLE
-                    tvRegister.visibility = VISIBLE
+                    btnLogin.visibility = View.VISIBLE
+                    tvRegister.visibility = View.VISIBLE
                 } else {
-                    resetPasswordView.btnSendPassReset.visibility = VISIBLE
+                    resetPasswordView.btnSendPassReset.visibility = View.VISIBLE
                 }
 
                 Toast.makeText(this, output, Toast.LENGTH_SHORT).show()
