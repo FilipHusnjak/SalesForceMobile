@@ -24,10 +24,15 @@ class MainMenuActivity : AppCompatActivity() {
         super.onResume()
         userSession.checkLogin()
 
-        mainMenuLayout.background = BitmapDrawable(
+//        mainMenuLayout.background = BitmapDrawable(
+//                applicationContext.resources,
+//                (application as MyApp).getInstance(applicationContext.resources)
+//        )
+
+        window.setBackgroundDrawable(BitmapDrawable(
                 applicationContext.resources,
                 (application as MyApp).getInstance(applicationContext.resources)
-        )
+        ))
     }
 
     override fun onBackPressed() {
