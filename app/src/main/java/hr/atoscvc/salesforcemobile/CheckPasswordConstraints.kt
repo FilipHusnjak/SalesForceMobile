@@ -1,7 +1,5 @@
 package hr.atoscvc.salesforcemobile
 
-data class PasswordErrors(val message: String, val success: Boolean)
-
 object CheckPasswordConstraints {
     fun checkPasswordConstraints(user: String, pass: String): PasswordErrors {
         if (pass.length < 8) {
