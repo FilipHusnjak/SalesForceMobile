@@ -9,4 +9,7 @@
 
     <!--   a secondary color for controls like checkboxes and text fields -->
     <color name="colorAccent">#FF4081</color>
+
+    <!--   color for edges of vector drawables   -->
+    <color name="strokeColorPrimary">@android:color/black</color>
 </resources>
