@@ -19,7 +19,7 @@ class MyApp : Application() {
                 listener.onSessionTimeout()
             }
 
-        }, 30000)    //TODO Use a normal value
+        }, 30000)    //FIXME Use a normal value
     }
 
     fun cancelTimer() {
