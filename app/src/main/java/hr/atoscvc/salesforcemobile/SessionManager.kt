@@ -5,9 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 
-//FILIP - ako se u Manifestu u MainMenuActivity stavi noHistory=true i stisne Back u Change Password...
-// ...aplikacija se ugasi, a na restartu user ostane ulogiran
 class SessionManager(private val context: Context) {
+    //FILIP - ako se u Manifestu u MainMenuActivity stavi noHistory=true i stisne Back u Change Password...
+    // ...aplikacija se ugasi, a na restartu user ostane ulogiran
 
     private val pref: SharedPreferences
     private val editor: SharedPreferences.Editor

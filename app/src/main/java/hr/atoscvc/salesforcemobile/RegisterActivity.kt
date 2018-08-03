@@ -11,7 +11,6 @@ import hr.atoscvc.salesforcemobile.CheckPasswordConstraints.checkPasswordConstra
 import kotlinx.android.synthetic.main.activity_register.*
 import java.lang.ref.WeakReference
 
-
 class RegisterActivity : AppCompatActivity(), AsyncResponse {
 
     private lateinit var userSession: SessionManager
