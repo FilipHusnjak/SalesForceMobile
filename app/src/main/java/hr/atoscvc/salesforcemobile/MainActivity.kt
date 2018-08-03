@@ -14,11 +14,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.reset_password.view.*
 import java.lang.ref.WeakReference
 
-
 class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
 
     //LUKA - Dodati Log na sve Create/Resume itd.
     //LUKA - Python line counter
+
+    //FIXME Saltati password u bazi!
 
     //FILIP - novi password (hard reset) nema nikakve provjere (CheckPasswordConstraints) - implementirati u JS-u
     //FILIP - forgot password loader indicator se trenutno vrti iza prozora pa se ne vidi
@@ -114,7 +115,7 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
     fun onLogin(@Suppress("UNUSED_PARAMETER") view: View) {
         username = etUsername.text.toString().trim()
         val tempPass = etPassword.text.toString()       // Do NOT trim the password
-
+        processFinish("Welcome")               //FIXME !!! OBRISATI OVU LINIJU !!!
         var thereAreNoErrors = true
 
         if (username.isBlank()) {
