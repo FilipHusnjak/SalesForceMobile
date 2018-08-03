@@ -33,6 +33,26 @@
             android:name=".ChangePasswordActivity"
             android:parentActivityName=".MainMenuActivity"
             android:theme="@style/LoginRegisterScreen" />
+        <activity
+            android:name=".ContactEditorActivity"
+            android:parentActivityName=".MainMenuActivity"
+            android:theme="@style/LoginRegisterScreen"
+            android:label="@string/newContact"/>
+        <activity
+            android:name=".CompanyEditorActivity"
+            android:parentActivityName=".MainMenuActivity"
+            android:theme="@style/LoginRegisterScreen"
+            android:label="@string/newCompany"/>
+        <activity
+            android:name=".CompanyListActivity"
+            android:parentActivityName=".MainMenuActivity"
+            android:theme="@style/LoginRegisterScreen"
+            android:label="@string/allCompanies"/>
+        <activity
+            android:name=".ContactListActivity"
+            android:parentActivityName=".MainMenuActivity"
+            android:theme="@style/LoginRegisterScreen"
+            android:label="@string/allContacts"/>
     </application>
 
 </manifest>

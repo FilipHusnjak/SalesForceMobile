@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ContactEditorActivity">
+
+    <Spinner
+        android:id="@+id/spTitleContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spStatusContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@+id/spTitleContact"
+        app:layout_constraintTop_toTopOf="@+id/spTitleContact" />
+
+    <EditText
+        android:id="@+id/etFirstNameContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/ic_action_smile"
+        android:drawablePadding="8dp"
+        android:drawableStart="@drawable/ic_action_smile"
+        android:ems="10"
+        android:hint="@string/FirstName"
+        android:inputType="textCapWords"
+        app:layout_constraintStart_toStartOf="@+id/spTitleContact"
+        app:layout_constraintTop_toBottomOf="@+id/spTitleContact" />
+
+    <EditText
+        android:id="@+id/etLastNameContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/ic_action_smile"
+        android:drawablePadding="8dp"
+        android:drawableStart="@drawable/ic_action_smile"
+        android:ems="10"
+        android:hint="@string/LastName"
+        android:inputType="textCapWords"
+        app:layout_constraintStart_toStartOf="@+id/etFirstNameContact"
+        app:layout_constraintTop_toBottomOf="@+id/etFirstNameContact" />
+
+    <EditText
+        android:id="@+id/etCompanyNameContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/ic_action_company"
+        android:drawablePadding="8dp"
+        android:drawableStart="@drawable/ic_action_company"
+        android:ems="10"
+        android:hint="Company Name"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/etLastNameContact"
+        app:layout_constraintTop_toBottomOf="@+id/etLastNameContact" />
+
+    <EditText
+        android:id="@+id/etPhoneContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/ic_action_phone"
+        android:drawablePadding="8dp"
+        android:drawableStart="@drawable/ic_action_phone"
+        android:ems="10"
+        android:hint="Phone Number"
+        android:inputType="phone"
+        app:layout_constraintStart_toStartOf="@+id/etCompanyNameContact"
+        app:layout_constraintTop_toBottomOf="@+id/etCompanyNameContact" />
+
+    <EditText
+        android:id="@+id/etEmailContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/ic_action_email_outline"
+        android:drawablePadding="8dp"
+        android:drawableStart="@drawable/ic_action_email_outline"
+        android:ems="10"
+        android:hint="@string/Email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintStart_toStartOf="@+id/etPhoneContact"
+        app:layout_constraintTop_toBottomOf="@+id/etPhoneContact" />
+
+    <MultiAutoCompleteTextView
+        android:id="@+id/etDetailedContact"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Details"
+        app:layout_constraintStart_toStartOf="@+id/etEmailContact"
+        app:layout_constraintTop_toBottomOf="@+id/etEmailContact" />
+
+</android.support.constraint.ConstraintLayout>
