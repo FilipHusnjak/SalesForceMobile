@@ -7,8 +7,9 @@ import android.view.View
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_contact_editor.*
 
-
 class ContactEditorActivity : AppCompatActivity() {
+
+    //LUKA - Add ScrollView
 
     private lateinit var userSession: SessionManager
 
@@ -24,14 +25,20 @@ class ContactEditorActivity : AppCompatActivity() {
             this.title = getString(R.string.editContact)
         }
 
-        //LUKA - Add ScrollView
-        //LUKA - Make these arrays global
-        val itemsTitle = arrayOf("Mr.", "Mrs.", "Ms.", "Miss")
-        val adapterTitle = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, itemsTitle)
+        val adapterTitle = ArrayAdapter.createFromResource(
+                this,
+                R.array.contactTitle_array,
+                R.layout.support_simple_spinner_dropdown_item
+        )
+        adapterTitle.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
         spTitleContact.adapter = adapterTitle
 
-        val itemsStatus = arrayOf("ACTIVE", "INACTIVE")
-        val adapterStatus = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, itemsStatus)
+        val adapterStatus = ArrayAdapter.createFromResource(
+                this,
+                R.array.contactStatus_array,
+                R.layout.support_simple_spinner_dropdown_item
+        )
+        adapterStatus.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
         spStatusContact.adapter = adapterStatus
 
         etFirstNameContact.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
