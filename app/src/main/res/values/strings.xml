@@ -46,4 +46,14 @@
     <string name="logout">logout</string>
     <string name="wrongPassword">Wrong password.</string>
     <string name="passChangeSuccess">Password changed successfully!</string>
+    <string name="addContact">Add a new contact</string>
+    <string name="viewContacts">View all contacts</string>
+    <string name="addCompany">Add a new company</string>
+    <string name="viewCompanies">View all companies</string>
+    <string name="allCompanies">All Companies</string>
+    <string name="allContacts">All Contacts</string>
+    <string name="newCompany">New Company</string>
+    <string name="editCompany">Edit Company</string>
+    <string name="editContact">Edit Contact</string>
+    <string name="newContact">New Contact</string>
 </resources>
