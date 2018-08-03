@@ -94,11 +94,6 @@ class RegisterActivity : AppCompatActivity(), AsyncResponse {
         registerProgress.visibility = View.INVISIBLE
         btnRegister.visibility = View.VISIBLE
 
-//        registerLayout.background = BitmapDrawable(
-//                applicationContext.resources,
-//                (application as MyApp).getInstance(applicationContext.resources)
-//        )
-
         window.setBackgroundDrawable(BitmapDrawable(
                 applicationContext.resources,
                 (application as MyApp).getInstance(applicationContext.resources)

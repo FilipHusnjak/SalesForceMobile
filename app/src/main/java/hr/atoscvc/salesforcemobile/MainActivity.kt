@@ -65,7 +65,6 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
                 etUsername.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_username_outline_accent, 0, 0, 0)
             }
         }
-
         etPassword.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 etPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_password_outline, 0, 0, 0)
@@ -88,11 +87,6 @@ class MainActivity : AppCompatActivity(), AsyncResponse, LogoutListener {
         loginProgress.visibility = View.INVISIBLE
         btnLogin.visibility = View.VISIBLE
         tvRegister.visibility = View.VISIBLE
-
-//        loginLayout.background = BitmapDrawable(
-//                applicationContext.resources,
-//                (application as MyApp).getInstance(applicationContext.resources)
-//        )
 
         window.setBackgroundDrawable(BitmapDrawable(
                 applicationContext.resources,

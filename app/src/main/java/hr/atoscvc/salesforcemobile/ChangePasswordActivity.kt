@@ -109,11 +109,6 @@ class ChangePasswordActivity : AppCompatActivity() {
         btnChangePassCancel.visibility = View.VISIBLE
         changePassProgress.visibility = View.INVISIBLE
 
-//        changePasswordLayout.background = BitmapDrawable(
-//                applicationContext.resources,
-//                (application as MyApp).getInstance(applicationContext.resources)
-//        )
-
         window.setBackgroundDrawable(BitmapDrawable(
                 applicationContext.resources,
                 (application as MyApp).getInstance(applicationContext.resources)
