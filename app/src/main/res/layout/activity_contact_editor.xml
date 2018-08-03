@@ -96,7 +96,7 @@
         app:layout_constraintTop_toBottomOf="@+id/etPhoneContact" />
 
     <MultiAutoCompleteTextView
-        android:id="@+id/etDetailedContact"
+        android:id="@+id/etDetailsContact"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
