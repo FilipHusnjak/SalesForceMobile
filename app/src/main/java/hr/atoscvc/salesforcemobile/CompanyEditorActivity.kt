@@ -11,9 +11,15 @@ class CompanyEditorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_company_editor)
+
         userSession = SessionManager(this)
-        //FIXME use line below if this activity is used for editing
-        //this.title = getString(R.string.editCompany)
+
+        if (intent.getBooleanExtra(getString(R.string.isEditorForNewItem), false)) {
+            this.title = getString(R.string.newCompany)
+        } else {
+            this.title = getString(R.string.editCompany)
+        }
+
     }
 
     override fun onResume() {

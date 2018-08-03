@@ -64,16 +64,21 @@ class MainMenuActivity : AppCompatActivity() {
     }
 
     fun onAddContact(@Suppress("UNUSED_PARAMETER") view: View) {
-        val intent = Intent(this, ContactEditorActivity::class.java)
+        val intent = Intent(this, ContactEditorActivity::class.java).apply {
+            putExtra(getString(R.string.isEditorForNewItem), true)
+        }
         startActivity(intent)
     }
 
     fun onViewContacts(@Suppress("UNUSED_PARAMETER") view: View) {
         val intent = Intent(this, ContactListActivity::class.java)
-        startActivity(intent)    }
+        startActivity(intent)
+    }
 
     fun onAddCompany(@Suppress("UNUSED_PARAMETER") view: View) {
-        val intent = Intent(this, CompanyEditorActivity::class.java)
+        val intent = Intent(this, CompanyEditorActivity::class.java).apply {
+            putExtra(getString(R.string.isEditorForNewItem), true)
+        }
         startActivity(intent)
     }
 

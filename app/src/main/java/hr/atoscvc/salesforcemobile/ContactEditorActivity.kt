@@ -15,9 +15,14 @@ class ContactEditorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact_editor)
+
         userSession = SessionManager(this)
-        //FIXME use line below if this activity is used for editing
-        //this.title = getString(R.string.editContact)
+
+        if (intent.getBooleanExtra(getString(R.string.isEditorForNewItem), false)) {
+            this.title = getString(R.string.newContact)
+        } else {
+            this.title = getString(R.string.editContact)
+        }
 
         //LUKA - Add ScrollView
         //LUKA - Make these arrays global

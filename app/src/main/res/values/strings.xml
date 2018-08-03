@@ -77,4 +77,6 @@
     <string name="email">email</string>
     <string name="password">password</string>
 
+    <string name="isEditorForNewItem">isEditorForNewItem</string>
+
 </resources>
