@@ -10,7 +10,6 @@ import java.net.MalformedURLException
 import java.net.URL
 import java.net.URLEncoder
 
-
 class BackgroundWorker(
         private val context: WeakReference<Context>,
         @Suppress("unused") private val header: String,
