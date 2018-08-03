@@ -89,6 +89,14 @@
     <string name="email">email</string>
     <string name="password">password</string>
 
-    <string name="isEditorForNewItem">isEditorForNewItem</string>
+    <string name="isEditorForNewItemExtra">"isEditorForNewItemExtra"</string>
+    <string name="contactTitleSpinnerIndexExtra">contactTitleSpinnerIndexExtra</string>
+    <string name="contactStatusSpinnerIndexExtra">contactStatusSpinnerIndexExtra</string>
+    <string name="contactFirstNameExtra">contactFirstNameExtra</string>
+    <string name="contactLastNameExtra">contactLastNameExtra</string>
+    <string name="contactCompanyExtra">contactCompanyExtra</string>
+    <string name="contactPhoneExtra">contactPhoneExtra</string>
+    <string name="contactEmailExtra">contactEmailExtra</string>
+    <string name="contactDetailsExtra">contactDetailsExtra</string>
 
 </resources>

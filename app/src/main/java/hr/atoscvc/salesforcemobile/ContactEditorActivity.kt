@@ -10,6 +10,8 @@ import kotlinx.android.synthetic.main.activity_contact_editor.*
 class ContactEditorActivity : AppCompatActivity() {
 
     //LUKA - Add ScrollView
+    //TODO Ovako se dobiva string iz indeksa u bazi:  resources.getStringArray(R.array.contactTitle_array)[i]
+    //TODO Ovako se dobiva indeks selektiranog u spinneru:  spTitleContact.selectedItemPosition.toString()
 
     private lateinit var userSession: SessionManager
 
@@ -19,7 +21,7 @@ class ContactEditorActivity : AppCompatActivity() {
 
         userSession = SessionManager(this)
 
-        if (intent.getBooleanExtra(getString(R.string.isEditorForNewItem), false)) {
+        if (intent.getBooleanExtra(getString(R.string.isEditorForNewItemExtra), false)) {
             this.title = getString(R.string.newContact)
         } else {
             this.title = getString(R.string.editContact)
@@ -82,6 +84,17 @@ class ContactEditorActivity : AppCompatActivity() {
                 etEmailContact.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_email_outline_accent, 0, 0, 0)
             }
         }
+
+        spTitleContact.setSelection(intent.getIntExtra(getString(R.string.contactTitleSpinnerIndexExtra), 0))
+        spStatusContact.setSelection(intent.getIntExtra(getString(R.string.contactStatusSpinnerIndexExtra), 0))
+        etFirstNameContact.setText(intent.getStringExtra(getString(R.string.contactFirstNameExtra)))
+        etLastNameContact.setText(intent.getStringExtra(getString(R.string.contactLastNameExtra)))
+        //FIXME Ovo ne bi trebao biti string (ovisi o tome sto ce se dogoditi s tim poljem)
+        etCompanyNameContact.setText(intent.getStringExtra(getString(R.string.contactCompanyExtra)))
+        etPhoneContact.setText(intent.getStringExtra(getString(R.string.contactPhoneExtra)))
+        etEmailContact.setText(intent.getStringExtra(getString(R.string.contactEmailExtra)))
+        etDetailsContact.setText(intent.getStringExtra(getString(R.string.contactDetailsExtra)))
+
     }
 
     override fun onResume() {
