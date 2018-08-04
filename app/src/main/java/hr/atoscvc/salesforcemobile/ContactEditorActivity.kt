@@ -33,7 +33,7 @@ class ContactEditorActivity : AppCompatActivity() {
                 R.layout.support_simple_spinner_dropdown_item
         )
         adapterTitle.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
-        spTitleContact.adapter = adapterTitle
+        spContactTitle.adapter = adapterTitle
 
         val adapterStatus = ArrayAdapter.createFromResource(
                 this,
@@ -41,59 +41,59 @@ class ContactEditorActivity : AppCompatActivity() {
                 R.layout.support_simple_spinner_dropdown_item
         )
         adapterStatus.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
-        spStatusContact.adapter = adapterStatus
+        spContactStatus.adapter = adapterStatus
 
-        etFirstNameContact.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+        etContactFirstName.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                etFirstNameContact.setText(etFirstNameContact.text.toString().trim())
-                etFirstNameContact.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_smile, 0, 0, 0)
+                etContactFirstName.setText(etContactFirstName.text.toString().trim())
+                etContactFirstName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_smile, 0, 0, 0)
             } else {
-                etFirstNameContact.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_smile_accent, 0, 0, 0)
+                etContactFirstName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_smile_accent, 0, 0, 0)
             }
         }
-        etLastNameContact.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+        etContactLastName.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                etLastNameContact.setText(etLastNameContact.text.toString().trim())
-                etLastNameContact.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_smile, 0, 0, 0)
+                etContactLastName.setText(etContactLastName.text.toString().trim())
+                etContactLastName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_smile, 0, 0, 0)
             } else {
-                etLastNameContact.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_smile_accent, 0, 0, 0)
+                etContactLastName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_smile_accent, 0, 0, 0)
             }
         }
         //FIXME etCompanyNameContact bi trebao imati svoj button i onda search ili create new (nije editable)
-        etCompanyNameContact.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+        etContactCompanyName.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                etCompanyNameContact.setText(etCompanyNameContact.text.toString().trim())
-                etCompanyNameContact.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_company, 0, 0, 0)
+                etContactCompanyName.setText(etContactCompanyName.text.toString().trim())
+                etContactCompanyName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_company, 0, 0, 0)
             } else {
-                etCompanyNameContact.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_company_accent, 0, 0, 0)
+                etContactCompanyName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_company_accent, 0, 0, 0)
             }
         }
-        etPhoneContact.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+        etContactPhone.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                etPhoneContact.setText(etPhoneContact.text.toString().trim())
-                etPhoneContact.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_phone, 0, 0, 0)
+                etContactPhone.setText(etContactPhone.text.toString().trim())
+                etContactPhone.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_phone, 0, 0, 0)
             } else {
-                etPhoneContact.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_phone_accent, 0, 0, 0)
+                etContactPhone.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_phone_accent, 0, 0, 0)
             }
         }
-        etEmailContact.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+        etContactEmail.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                etEmailContact.setText(etEmailContact.text.toString().trim())
-                etEmailContact.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_email_outline, 0, 0, 0)
+                etContactEmail.setText(etContactEmail.text.toString().trim())
+                etContactEmail.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_email_outline, 0, 0, 0)
             } else {
-                etEmailContact.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_email_outline_accent, 0, 0, 0)
+                etContactEmail.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_email_outline_accent, 0, 0, 0)
             }
         }
 
-        spTitleContact.setSelection(intent.getIntExtra(getString(R.string.EXTRA_CONTACT_TITLE_SPINNER_INDEX), 0))
-        spStatusContact.setSelection(intent.getIntExtra(getString(R.string.EXTRA_CONTACT_STATUS_SPINNER_INDEX), 0))
-        etFirstNameContact.setText(intent.getStringExtra(getString(R.string.EXTRA_CONTACT_FIRST_NAME)))
-        etLastNameContact.setText(intent.getStringExtra(getString(R.string.EXTRA_CONTACT_LAST_NAME)))
+        spContactTitle.setSelection(intent.getIntExtra(getString(R.string.EXTRA_CONTACT_TITLE_SPINNER_INDEX), 0))
+        spContactStatus.setSelection(intent.getIntExtra(getString(R.string.EXTRA_CONTACT_STATUS_SPINNER_INDEX), 0))
+        etContactFirstName.setText(intent.getStringExtra(getString(R.string.EXTRA_CONTACT_FIRST_NAME)))
+        etContactLastName.setText(intent.getStringExtra(getString(R.string.EXTRA_CONTACT_LAST_NAME)))
         //FIXME Ovo ne bi trebao biti string (ovisi o tome sto ce se dogoditi s tim poljem)
-        etCompanyNameContact.setText(intent.getStringExtra(getString(R.string.EXTRA_CONTACT_COMPANY)))
-        etPhoneContact.setText(intent.getStringExtra(getString(R.string.EXTRA_CONTACT_PHONE)))
-        etEmailContact.setText(intent.getStringExtra(getString(R.string.EXTRA_CONTACT_EMAIL)))
-        etDetailsContact.setText(intent.getStringExtra(getString(R.string.EXTRA_CONTACT_DETAILS)))
+        etContactCompanyName.setText(intent.getStringExtra(getString(R.string.EXTRA_CONTACT_COMPANY)))
+        etContactPhone.setText(intent.getStringExtra(getString(R.string.EXTRA_CONTACT_PHONE)))
+        etContactEmail.setText(intent.getStringExtra(getString(R.string.EXTRA_CONTACT_EMAIL)))
+        etContactDetails.setText(intent.getStringExtra(getString(R.string.EXTRA_CONTACT_DETAILS)))
 
     }
 
