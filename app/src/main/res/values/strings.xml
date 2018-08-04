@@ -65,8 +65,8 @@
     </string-array>
 
     <string-array name="contactStatus_array">
-        <item>Active</item>
-        <item>Inactive</item>
+        <item>ACTIVE</item>
+        <item>INACTIVE</item>
     </string-array>
 
 
