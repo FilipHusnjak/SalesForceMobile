@@ -30,17 +30,15 @@ class ContactEditorActivity : AppCompatActivity() {
         val adapterTitle = ArrayAdapter.createFromResource(
                 this,
                 R.array.contactTitle_array,
-                R.layout.support_simple_spinner_dropdown_item
+                R.layout.simple_spinner_dropdown_item
         )
-        adapterTitle.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
         spContactTitle.adapter = adapterTitle
 
         val adapterStatus = ArrayAdapter.createFromResource(
                 this,
                 R.array.contactStatus_array,
-                R.layout.support_simple_spinner_dropdown_item
+                R.layout.simple_spinner_dropdown_item
         )
-        adapterStatus.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
         spContactStatus.adapter = adapterStatus
 
         etContactFirstName.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->

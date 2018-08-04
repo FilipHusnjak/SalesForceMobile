@@ -7,28 +7,30 @@
     tools:context=".ContactEditorActivity">
 
     <Spinner
-        android:id="@+id/spContactTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
         android:id="@+id/spContactStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintStart_toEndOf="@+id/spContactTitle"
-        app:layout_constraintTop_toTopOf="@+id/spContactTitle" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/spContactTitle"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Spinner
+        android:id="@+id/spContactTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="@+id/etContactFirstName"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etContactFirstName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="65dp"
+        android:layout_marginLeft="65dp"
+        android:layout_marginRight="65dp"
+        android:layout_marginStart="65dp"
         android:layout_marginTop="8dp"
         android:drawableLeft="@drawable/ic_action_smile"
         android:drawablePadding="8dp"
@@ -36,13 +38,18 @@
         android:ems="10"
         android:hint="@string/FirstName"
         android:inputType="textCapWords"
-        app:layout_constraintStart_toStartOf="@+id/spContactTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spContactTitle" />
 
     <EditText
         android:id="@+id/etContactLastName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="65dp"
+        android:layout_marginLeft="65dp"
+        android:layout_marginRight="65dp"
+        android:layout_marginStart="65dp"
         android:layout_marginTop="8dp"
         android:drawableLeft="@drawable/ic_action_smile"
         android:drawablePadding="8dp"
@@ -50,13 +57,18 @@
         android:ems="10"
         android:hint="@string/LastName"
         android:inputType="textCapWords"
-        app:layout_constraintStart_toStartOf="@+id/etContactFirstName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etContactFirstName" />
 
     <EditText
         android:id="@+id/etContactCompanyName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="65dp"
+        android:layout_marginLeft="65dp"
+        android:layout_marginRight="65dp"
+        android:layout_marginStart="65dp"
         android:layout_marginTop="8dp"
         android:drawableLeft="@drawable/ic_action_company"
         android:drawablePadding="8dp"
@@ -64,13 +76,18 @@
         android:ems="10"
         android:hint="Company Name"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/etContactLastName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etContactLastName" />
 
     <EditText
         android:id="@+id/etContactPhone"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="65dp"
+        android:layout_marginLeft="65dp"
+        android:layout_marginRight="65dp"
+        android:layout_marginStart="65dp"
         android:layout_marginTop="8dp"
         android:drawableLeft="@drawable/ic_action_phone"
         android:drawablePadding="8dp"
@@ -78,13 +95,18 @@
         android:ems="10"
         android:hint="@string/PhoneNumber"
         android:inputType="phone"
-        app:layout_constraintStart_toStartOf="@+id/etContactCompanyName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etContactCompanyName" />
 
     <EditText
         android:id="@+id/etContactEmail"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="65dp"
+        android:layout_marginLeft="65dp"
+        android:layout_marginRight="65dp"
+        android:layout_marginStart="65dp"
         android:layout_marginTop="8dp"
         android:drawableLeft="@drawable/ic_action_email_outline"
         android:drawablePadding="8dp"
@@ -92,16 +114,36 @@
         android:ems="10"
         android:hint="@string/Email"
         android:inputType="textEmailAddress"
-        app:layout_constraintStart_toStartOf="@+id/etContactPhone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etContactPhone" />
 
     <MultiAutoCompleteTextView
         android:id="@+id/etContactDetails"
-        android:layout_width="250dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="65dp"
+        android:layout_marginLeft="65dp"
+        android:layout_marginRight="65dp"
+        android:layout_marginStart="65dp"
         android:layout_marginTop="8dp"
         android:hint="@string/Details"
-        app:layout_constraintStart_toStartOf="@+id/etContactEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etContactEmail" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etContactDetails" />
 
 </android.support.constraint.ConstraintLayout>
