@@ -60,7 +60,7 @@ class MainMenuActivity : AppCompatActivity() {
 
     fun onAddContact(@Suppress("UNUSED_PARAMETER") view: View) {
         val intent = Intent(this, ContactEditorActivity::class.java).apply {
-            putExtra(getString(R.string.isEditorForNewItemExtra), true)
+            putExtra(getString(R.string.EXTRA_IS_EDITOR_FOR_NEW_ITEM), true)
         }
         startActivity(intent)
     }
@@ -72,7 +72,7 @@ class MainMenuActivity : AppCompatActivity() {
 
     fun onAddCompany(@Suppress("UNUSED_PARAMETER") view: View) {
         val intent = Intent(this, CompanyEditorActivity::class.java).apply {
-            putExtra(getString(R.string.isEditorForNewItemExtra), true)
+            putExtra(getString(R.string.EXTRA_IS_EDITOR_FOR_NEW_ITEM), true)
         }
         startActivity(intent)
     }

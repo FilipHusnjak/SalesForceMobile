@@ -14,7 +14,7 @@ class CompanyEditorActivity : AppCompatActivity() {
 
         userSession = SessionManager(this)
 
-        if (intent.getBooleanExtra(getString(R.string.isEditorForNewItemExtra), false)) {
+        if (intent.getBooleanExtra(getString(R.string.EXTRA_IS_EDITOR_FOR_NEW_ITEM), false)) {
             this.title = getString(R.string.newCompany)
         } else {
             this.title = getString(R.string.editCompany)

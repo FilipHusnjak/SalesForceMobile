@@ -54,7 +54,7 @@
     <string name="wrongPassword">Wrong password.</string>
     <string name="change">Change</string>
     <string name="passChangeSuccess">Password changed successfully!</string>
-    
+
     <string-array name="contactTitle_array">
         <item>Mr.</item>
         <item>Mrs.</item>
@@ -89,14 +89,14 @@
     <string name="email">email</string>
     <string name="password">password</string>
 
-    <string name="isEditorForNewItemExtra">"isEditorForNewItemExtra"</string>
-    <string name="contactTitleSpinnerIndexExtra">contactTitleSpinnerIndexExtra</string>
-    <string name="contactStatusSpinnerIndexExtra">contactStatusSpinnerIndexExtra</string>
-    <string name="contactFirstNameExtra">contactFirstNameExtra</string>
-    <string name="contactLastNameExtra">contactLastNameExtra</string>
-    <string name="contactCompanyExtra">contactCompanyExtra</string>
-    <string name="contactPhoneExtra">contactPhoneExtra</string>
-    <string name="contactEmailExtra">contactEmailExtra</string>
-    <string name="contactDetailsExtra">contactDetailsExtra</string>
+    <string name="EXTRA_IS_EDITOR_FOR_NEW_ITEM">hr.atoscvc.salesforcemobile.EXTRA_IS_EDITOR_FOR_NEW_ITEM</string>
+    <string name="EXTRA_CONTACT_TITLE_SPINNER_INDEX">hr.atoscvc.salesforcemobile.EXTRA_CONTACT_TITLE_SPINNER_INDEX</string>
+    <string name="EXTRA_CONTACT_STATUS_SPINNER_INDEX">hr.atoscvc.salesforcemobile.EXTRA_CONTACT_STATUS_SPINNER_INDEX</string>
+    <string name="EXTRA_CONTACT_FIRST_NAME">hr.atoscvc.salesforcemobile.EXTRA_CONTACT_FIRST_NAME</string>
+    <string name="EXTRA_CONTACT_LAST_NAME">hr.atoscvc.salesforcemobile.EXTRA_CONTACT_LAST_NAME</string>
+    <string name="EXTRA_CONTACT_COMPANY">hr.atoscvc.salesforcemobile.EXTRA_CONTACT_COMPANY</string>
+    <string name="EXTRA_CONTACT_PHONE">hr.atoscvc.salesforcemobile.EXTRA_CONTACT_PHONE</string>
+    <string name="EXTRA_CONTACT_EMAIL">hr.atoscvc.salesforcemobile.EXTRA_CONTACT_EMAIL</string>
+    <string name="EXTRA_CONTACT_DETAILS">hr.atoscvc.salesforcemobile.EXTRA_CONTACT_DETAILS</string>
 
 </resources>

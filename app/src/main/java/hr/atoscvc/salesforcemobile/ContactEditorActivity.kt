@@ -21,7 +21,7 @@ class ContactEditorActivity : AppCompatActivity() {
 
         userSession = SessionManager(this)
 
-        if (intent.getBooleanExtra(getString(R.string.isEditorForNewItemExtra), false)) {
+        if (intent.getBooleanExtra(getString(R.string.EXTRA_IS_EDITOR_FOR_NEW_ITEM), false)) {
             this.title = getString(R.string.newContact)
         } else {
             this.title = getString(R.string.editContact)
@@ -85,15 +85,15 @@ class ContactEditorActivity : AppCompatActivity() {
             }
         }
 
-        spTitleContact.setSelection(intent.getIntExtra(getString(R.string.contactTitleSpinnerIndexExtra), 0))
-        spStatusContact.setSelection(intent.getIntExtra(getString(R.string.contactStatusSpinnerIndexExtra), 0))
-        etFirstNameContact.setText(intent.getStringExtra(getString(R.string.contactFirstNameExtra)))
-        etLastNameContact.setText(intent.getStringExtra(getString(R.string.contactLastNameExtra)))
+        spTitleContact.setSelection(intent.getIntExtra(getString(R.string.EXTRA_CONTACT_TITLE_SPINNER_INDEX), 0))
+        spStatusContact.setSelection(intent.getIntExtra(getString(R.string.EXTRA_CONTACT_STATUS_SPINNER_INDEX), 0))
+        etFirstNameContact.setText(intent.getStringExtra(getString(R.string.EXTRA_CONTACT_FIRST_NAME)))
+        etLastNameContact.setText(intent.getStringExtra(getString(R.string.EXTRA_CONTACT_LAST_NAME)))
         //FIXME Ovo ne bi trebao biti string (ovisi o tome sto ce se dogoditi s tim poljem)
-        etCompanyNameContact.setText(intent.getStringExtra(getString(R.string.contactCompanyExtra)))
-        etPhoneContact.setText(intent.getStringExtra(getString(R.string.contactPhoneExtra)))
-        etEmailContact.setText(intent.getStringExtra(getString(R.string.contactEmailExtra)))
-        etDetailsContact.setText(intent.getStringExtra(getString(R.string.contactDetailsExtra)))
+        etCompanyNameContact.setText(intent.getStringExtra(getString(R.string.EXTRA_CONTACT_COMPANY)))
+        etPhoneContact.setText(intent.getStringExtra(getString(R.string.EXTRA_CONTACT_PHONE)))
+        etEmailContact.setText(intent.getStringExtra(getString(R.string.EXTRA_CONTACT_EMAIL)))
+        etDetailsContact.setText(intent.getStringExtra(getString(R.string.EXTRA_CONTACT_DETAILS)))
 
     }
 
